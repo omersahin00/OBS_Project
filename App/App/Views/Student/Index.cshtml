@@ -1,0 +1,49 @@
+@model List<App.Entities.Student>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Model Listesi</title>
+    <link rel="stylesheet" href="~/css/tablo.css" asp-append-version="true" />
+</head>
+<body>
+    <header class="header1">
+        <h1>Öğrencinin Notları</h1>
+    </header>
+
+    <div class="container1">
+        <table class="notlar-table1">
+            <thead>
+                <tr>
+                    <th class="parameters">Numara</th>
+                    <th class="parameters">İsim</th>
+                    <th class="parameters">Soyisim</th>
+                    <th class="parameters">Aktif notları ID</th>
+                    <th class="parameters">Şifre</th>
+                    <th class="parameters">Aktiflik</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var student in Model ?? Enumerable.Empty<App.Entities.Student>())
+                {
+                    <tr>
+                        <td>@student.Number</td>
+                        <td>@student.FirstName</td>
+                        <td>@student.LastName</td>
+                        <td>@student.StudentNotesID</td>
+                        <td>@student.Password</td>
+                        <td>@student.IsActive</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        @if (ViewBag.ErrorMessage != null)
+        {
+            <p> @ViewBag.ErrorMessage </p>
+        }
+    </div>
+
+</body>
+</html>

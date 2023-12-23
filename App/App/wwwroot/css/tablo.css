@@ -1,0 +1,42 @@
+.header1 {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 1em 0;
+}
+
+.container1 {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.notlar-table1 {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+button {
+    background-color: #4caf50;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+
+.parameters {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.ders-adi1 {
+    background-color: #333;
+    color: #fff;
+}

@@ -1,0 +1,37 @@
+﻿@model App.Entities.Student
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Create Form</title>
+    <link rel="stylesheet" href="~/css/create.css" asp-append-version="true" />
+</head>
+<body>
+    @if (ViewBag.Message != null)
+    {
+        <p> @ViewBag.Message </p>
+    }
+    @if (ViewBag.ErrorMessage != null)
+    {
+        <p> @ViewBag.ErrorMessage </p>
+    }
+    <div class="container2">
+        <h2>Student Update Form</h2>
+        <form asp-action="Update" method="post">
+            <label for="Number">Number:</label>
+            <input type="text" id="Number" name="Number" required>
+
+            <label for="Password">Password:</label>
+            <input type="text" id="Password" name="Password" required>
+
+            <label for="StudentNotesID">Student Notes ID:</label>
+            <input type="text" id="StudentNotesID" name="StudentNotesID" required>
+
+            <button type="submit" asp-action="Update">Update</button>
+        </form>
+    </div>
+</body>
+</html>
+

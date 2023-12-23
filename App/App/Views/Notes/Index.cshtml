@@ -1,0 +1,63 @@
+﻿@model List<App.Entities.Notes>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Model Listesi</title>
+    <link rel="stylesheet" href="~/css/tablo.css" asp-append-version="true" />
+</head>
+<body>
+    <header class="header1">
+        <h1>Öğrencinin Notları</h1>
+    </header>
+    <div class="container1">
+        @* Öğrencinin numarası alınacak: *@
+        <form asp-action="Index" asp-controller="Notes" method="post">
+            <p>
+                <label for="Number">Number:</label>
+            </p>
+            <p>
+                <input type="text" id="Number" name="Number" required> <br />
+            </p> <br />
+            <button type="submit" asp-action="Index">Notları görüntüle</button>
+        </form>
+    </div>
+
+    @if (Model != null)
+    {
+        <div class="container1">
+            <table class="notlar-table1">
+                <thead>
+                    <tr>
+                        <th class="parameters">ID</th>
+                        <th class="parameters">Student Notes ID</th>
+                        <th class="parameters">Course ID</th>
+                        <th class="parameters">Score</th>
+                        <th class="parameters">Letter Score</th>
+                        <th class="parameters">Aktiflik</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var notes in Model@* ?? Enumerable.Empty<App.Entities.Notes>()*@)
+                    {
+                        <tr>
+                            <td>@notes.ID</td>
+                            <td>@notes.StudentNotesID</td>
+                            <td>@notes.CourseID</td>
+                            <td>@notes.Score</td>
+                            <td>@notes.LetterScore</td>
+                            <td>@notes.IsActive</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+    @if (ViewBag.ErrorMessage != null)
+    {
+        <p> @ViewBag.ErrorMessage </p>
+    }
+</body>
+</html>
