@@ -22,7 +22,7 @@ namespace Web_API.Controllers
 
         [HttpGet("api/Account/Get/CheckNumber/{Number}")]
         public ActionResult<IEnumerable<AccountTypeEnum>> CheckNumber(string Number)
-        {    
+        {   
             Employee? employee = _context.Employees.FirstOrDefault(x => x.UserNumber == Number);
             if (employee != null)
             {
@@ -43,23 +43,28 @@ namespace Web_API.Controllers
         [HttpPost("api/Account/LoginEmployee")]
         public ActionResult<IEnumerable<LoginReturnEnum>> EmployeeLogin(Employee employee)
         {
-            Employee? employeeData = _context.Employees.FirstOrDefault(x => x.UserNumber == employee.UserNumber);
-            if (employeeData == null)
+            try
             {
-                return Ok(LoginReturnEnum.WrongNumber);
-            }
-            else
-            {
-                employeeData = null;
-                employeeData = _context.Employees.FirstOrDefault(x => x.UserNumber == employee.UserNumber && x.Password == employee.Password);
-                if (employeeData != null)
+                Employee? employeeData = _context.Employees.FirstOrDefault(x => x.UserNumber == employee.UserNumber);
+                if (employeeData == null)
                 {
-                    return Ok(LoginReturnEnum.Accept);
+                    return Ok(LoginReturnEnum.WrongNumber);
                 }
                 else
                 {
-                    return Ok(LoginReturnEnum.WrongPassword);
+                    if (employeeData.Password == employee.Password)
+                    {
+                        return Ok(LoginReturnEnum.Accept);
+                    }
+                    else
+                    {
+                        return Ok(LoginReturnEnum.WrongPassword);
+                    }
                 }
+            }
+            catch (Exception)
+            {
+                return Ok(LoginReturnEnum.Null);
             }
         }
 
@@ -68,23 +73,28 @@ namespace Web_API.Controllers
         [HttpPost("api/Account/LoginStudent")]
         public ActionResult<IEnumerable<LoginReturnEnum>> StudentLogin(Student student)
         {
-            Student? studentData = _context.Students.FirstOrDefault(x => x.Number == student.Number);
-            if (studentData == null)
+            try
             {
-                return Ok(LoginReturnEnum.WrongNumber);
-            }
-            else
-            {
-                studentData = null;
-                studentData = _context.Students.FirstOrDefault(x => x.Number == student.Number && x.Password == student.Password);
-                if (studentData != null)
+                Student? studentData = _context.Students.FirstOrDefault(x => x.Number == student.Number);
+                if (studentData == null)
                 {
-                    return Ok(LoginReturnEnum.Accept);
+                    return Ok(LoginReturnEnum.WrongNumber);
                 }
                 else
                 {
-                    return Ok(LoginReturnEnum.WrongPassword);
+                    if (studentData.Password == student.Password)
+                    {
+                        return Ok(LoginReturnEnum.Accept);
+                    }
+                    else
+                    {
+                        return Ok(LoginReturnEnum.WrongPassword);
+                    }
                 }
+            }
+            catch (Exception)
+            {
+                return Ok(LoginReturnEnum.Null);
             }
         }
 

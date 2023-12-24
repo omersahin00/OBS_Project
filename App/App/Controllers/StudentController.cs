@@ -41,6 +41,12 @@ namespace App.Controllers
                     .Build();
 
                 var result = await _requestFactory.SendHttpGetRequest(dockerApiUrl);
+                if (result == string.Empty)
+                {
+                    ViewBag.ErrorMessage = "API ile iletişim kurulamadı!";
+                    return View();
+                }
+
                 var model = JsonConvert.DeserializeObject<List<Student>>(result);
                 return View(model);
             }

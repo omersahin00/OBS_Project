@@ -12,6 +12,18 @@
     <header class="header1">
         <h1>Öğrencinin Notları</h1>
     </header>
+    @if (ViewBag.Message != null)
+    {
+        <p style="color:green"> @ViewBag.Message </p>
+    }
+    @if (ViewBag.ErrorMessage != null)
+    {
+        <p style="color:red"> @ViewBag.ErrorMessage </p>
+    }
+    @if (TempData != null)
+    {
+        <p style="color:red"> @TempData["ErrorMessage"] </p>
+    }
     <div class="container1">
         @* Öğrencinin numarası alınacak: *@
         <form asp-action="Index" asp-controller="Notes" method="post">
@@ -54,10 +66,6 @@
                 </tbody>
             </table>
         </div>
-    }
-    @if (ViewBag.ErrorMessage != null)
-    {
-        <p> @ViewBag.ErrorMessage </p>
     }
 </body>
 </html>

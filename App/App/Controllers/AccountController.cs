@@ -52,6 +52,12 @@ namespace App.Controllers
                 .Build();
 
             var result = await _requestFactory.SendHttpGetRequest(dockerApiUrl);
+            if (result == string.Empty)
+            {
+                ViewBag.ErrorMessage = "API ile iletişim kurulamadı!";
+                return View();
+            }
+
             AccountTypeEnum accountType = JsonConvert.DeserializeObject<AccountTypeEnum>(result);
 
             if (accountType != AccountTypeEnum.Null)
@@ -113,6 +119,12 @@ namespace App.Controllers
 
             string jsonProduct = JsonConvert.SerializeObject(employee);
             var result = await _requestFactory.SendHttpPostRequest(dockerApiUrl, jsonProduct);
+            if (result == string.Empty)
+            {
+                ViewBag.ErrorMessage = "API ile iletişim kurulamadı!";
+                return View();
+            }
+
             LoginReturnEnum loginReturnType = JsonConvert.DeserializeObject<LoginReturnEnum>(result);
 
             if (loginReturnType == LoginReturnEnum.Accept)
@@ -150,10 +162,10 @@ namespace App.Controllers
                 ViewBag.ErrorMessage = "Hata";
             }
 
-
             if (employee.UserNumber != null)
             {
                 TempData["NewAccountNumber"] = employee.UserNumber.ToString();
+                return RedirectToAction("EmployeeLogin", "Account");
             }
             return View();
         }
@@ -191,6 +203,12 @@ namespace App.Controllers
 
             string jsonProduct = JsonConvert.SerializeObject(student);
             var result = await _requestFactory.SendHttpPostRequest(dockerApiUrl, jsonProduct);
+            if (result == string.Empty)
+            {
+                ViewBag.ErrorMessage = "API ile iletişim kurulamadı!";
+                return View();
+            }
+
             LoginReturnEnum loginReturnType = JsonConvert.DeserializeObject<LoginReturnEnum>(result);
 
             if (loginReturnType == LoginReturnEnum.Accept)
@@ -268,6 +286,12 @@ namespace App.Controllers
 
                 string jsonProduct = JsonConvert.SerializeObject(employee);
                 var result = await _requestFactory.SendHttpPostRequest(dockerApiUrl, jsonProduct);
+                if (result == string.Empty)
+                {
+                    ViewBag.ErrorMessage = "API ile iletişim kurulamadı!";
+                    return View();
+                }
+
                 Employee? employeeData = JsonConvert.DeserializeObject<Employee>(result);
 
                 if (employeeData != null)

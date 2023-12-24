@@ -16,29 +16,43 @@ namespace App.Managers
 
         public async Task<string> SendHttpGetRequest(string apiUrl)
         {
-            using (var httpClient = _httpClientFactory.CreateClient())
+            try
             {
-                HttpResponseMessage response = await httpClient.GetAsync(apiUrl);
-                response.EnsureSuccessStatusCode();
+                using (var httpClient = _httpClientFactory.CreateClient())
+                {
+                    HttpResponseMessage? response = await httpClient.GetAsync(apiUrl);
+                    response.EnsureSuccessStatusCode();
 
-                return await response.Content.ReadAsStringAsync();
+                    return await response.Content.ReadAsStringAsync();
+                }
+            }
+            catch (Exception)
+            {
+                return string.Empty;
             }
         }
 
 
         public async Task<string> SendHttpPostRequest(string apiUrl, string jsonContent)
         {
-            using (var httpClient = _httpClientFactory.CreateClient())
+            try
             {
-                var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
-                HttpResponseMessage response = await httpClient.PostAsync(apiUrl, content);
-                response.EnsureSuccessStatusCode();
+                using (var httpClient = _httpClientFactory.CreateClient())
+                {
+                    var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+                    HttpResponseMessage response = await httpClient.PostAsync(apiUrl, content);
+                    response.EnsureSuccessStatusCode();
 
-                return await response.Content.ReadAsStringAsync();
+                    return await response.Content.ReadAsStringAsync();
+                }
             }
+            catch (Exception)
+            {
+                return string.Empty;
+            }
+            
         }
-         
-
+        
     }
 }
 
