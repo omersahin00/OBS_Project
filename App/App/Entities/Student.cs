@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace App.Entities
 {
-	public class Student
+	public class Student : Account
 	{
         [Key]
         public int ID { get; set; }

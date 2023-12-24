@@ -5,6 +5,9 @@ namespace App.Enums
 {
 	public enum EntitiesEnum
 	{
+        [Description("Account")]
+        Account,
+
 		[Description("Student")]
 		Student,
 
@@ -15,7 +18,10 @@ namespace App.Enums
         Notes,
 
         [Description("Employee")]
-        Employee
+        Employee,
+
+        [Description("Admin")]
+        Admin
 	}
 }
 

@@ -36,7 +36,7 @@ namespace Web_API.Controllers
                 }
                 else
                 {
-                    return NotFound();
+                    return NoContent();
                 }
             }
             catch (Exception)

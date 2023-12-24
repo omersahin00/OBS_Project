@@ -18,7 +18,10 @@ namespace App.Enums
         Update,
 
         [Description("All")]
-        All
+        All,
+
+        [Description("CheckNumber")]
+        CheckNumber
     }
 }
 

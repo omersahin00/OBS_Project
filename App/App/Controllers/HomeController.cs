@@ -1,6 +1,8 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using App.Models;
+using App.Builders;
+using App.Enums;
 
 namespace App.Controllers;
 
@@ -15,6 +17,18 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
+        // Buradaki url test amaçlı oluşturulmuştur:
+        // Buradaki url test amaçlı oluşturulmuştur:
+        //string apiUrl = new ApiUrlBuilder(UrlTypeEnum.api)
+        //                .AddParameter(213)
+        //                .AddEntities(EntitiesEnum.Student)
+        //                .AddRequest(RequestEnum.Get)
+        //                .AddMethod(MethodEnum.All)
+        //                .SetHttpSecurity(true)
+        //                .SetPortNumber(213)
+        //                .SetServerAddress("213.3422")
+        //                .Build();
+        //ViewBag.Message = apiUrl;
         return View();
     }
 

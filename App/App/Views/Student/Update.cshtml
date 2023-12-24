@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Create Form</title>
-    <link rel="stylesheet" href="~/css/create.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/student-create.css" asp-append-version="true" />
 </head>
 <body>
     @if (ViewBag.Message != null)
@@ -19,7 +19,7 @@
     }
     <div class="container2">
         <h2>Student Update Form</h2>
-        <form asp-action="Update" method="post">
+        <form asp-action="Update" asp-controller="Student" method="post">
             <label for="Number">Number:</label>
             <input type="text" id="Number" name="Number" required>
 

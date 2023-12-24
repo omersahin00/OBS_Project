@@ -14,6 +14,8 @@
     <None Remove="Views\Student\" />
     <None Remove="Managers\" />
     <None Remove="Enums\" />
+    <None Remove="Builders\" />
+    <None Remove="Views\Account\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Entities\" />
@@ -21,6 +23,8 @@
     <Folder Include="Views\Student\" />
     <Folder Include="Managers\" />
     <Folder Include="Enums\" />
+    <Folder Include="Builders\" />
+    <Folder Include="Views\Account\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />

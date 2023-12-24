@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using System.Security.Claims
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -37,9 +39,29 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Notes" asp-action="Index">Notes-Index</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="JointLoginPage">Account-JointLoginPage</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Create">|Gizli|Account-Create</a>
+                        </li>
                     </ul>
                 </div>
+                @if (User.Identity != null && User.Identity.IsAuthenticated)
+                {
+                    <p>Hoş geldiniz, @User.FindFirst(ClaimTypes.Email)?.Value</p>
+                }
+                else
+                {
+                    <p>Giriş yapmış bir kullanıcı yok.</p>
+                }
             </div>
+            @if (User.Identity != null && User.Identity.IsAuthenticated)
+            {
+                <form asp-controller="Account" asp-action="Logout" method="post">
+                    <button type="submit"> Çıkış Yap </button>
+                </form>
+            }
         </nav>
     </header>
     <div class="container">

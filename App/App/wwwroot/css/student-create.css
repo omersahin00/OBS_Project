@@ -31,3 +31,24 @@ button {
 button:hover {
     background-color: #45a049;
 }
+
+
+.dropdown-container {
+    text-align: center;
+}
+
+label {
+    margin-bottom: 10px;
+}
+
+/* Seçim Kutusu Stilleri */
+select {
+    padding: 10px;
+    font-size: 16px;
+}
+
+    /* Seçildiğinde Renk Değişimi */
+    select:focus {
+        border: 2px solid #3498db;
+        outline: none;
+    }

@@ -20,26 +20,15 @@ namespace Web_API.Controllers
         }
 
 
-        [HttpGet("api/Course/Get/WithNumber/{Number}")]
-        public ActionResult<IEnumerable<Course>> GetStudentAllCourses(string Number)
+        [HttpGet("api/Course/Get/All")]
+        public ActionResult<IEnumerable<Course>> GetAllCourse()
         {
             try
             {
-                var student = _context.Students.FirstOrDefault(x => x.Number == Number);
-                List<StudentActiveLessons> studentActiveLessonIDList;
-                List<Course> studentCourseList = new List<Course>();
-
-                if (student != null && student.ID != 0)
+                var courses = _context.Courses.ToList();
+                if (courses != null)
                 {
-                    studentActiveLessonIDList = _context.StudentActiveLessons.Where(x => x.StudentID == student.ID).ToList();
-                    foreach (var item in studentActiveLessonIDList)
-                    {
-                        var course = _context.Courses.FirstOrDefault(x => x.ID == item.CourseID);
-                        if (course != null)
-                            studentCourseList.Add(course);
-                    }
-
-                    return Ok(studentCourseList);
+                    return Ok(courses);
                 }
                 else
                 {
@@ -76,6 +65,37 @@ namespace Web_API.Controllers
         }
 
 
+        [HttpGet("api/Course/Get/WithNumber/{Number}")]
+        public ActionResult<IEnumerable<Course>> GetStudentAllCourses(string Number)
+        {
+            try
+            {
+                var student = _context.Students.FirstOrDefault(x => x.Number == Number);
+                List<StudentActiveLessons> studentActiveLessonIDList;
+                List<Course> studentCourseList = new List<Course>();
+
+                if (student != null && student.ID != 0)
+                {
+                    studentActiveLessonIDList = _context.StudentActiveLessons.Where(x => x.StudentID == student.ID).ToList();
+                    foreach (var item in studentActiveLessonIDList)
+                    {
+                        var course = _context.Courses.FirstOrDefault(x => x.ID == item.CourseID);
+                        if (course != null)
+                            studentCourseList.Add(course);
+                    }
+
+                    return Ok(studentCourseList);
+                }
+                else
+                {
+                    return NotFound();
+                }
+            }
+            catch (Exception)
+            {
+                return UnprocessableEntity();
+            }
+        }
 
 
         [HttpPost("api/Course/Post/Create")]

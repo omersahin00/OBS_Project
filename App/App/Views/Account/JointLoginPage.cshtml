@@ -1,0 +1,32 @@
+﻿@model string
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Form</title>
+    <link rel="stylesheet" href="~/css/student-create.css" asp-append-version="true" />
+</head>
+<body>
+    @if (ViewBag.Message != null)
+    {
+        <p style="color:green"> @ViewBag.Message </p>
+    }
+    @if (ViewBag.ErrorMessage != null)
+    {
+        <p style="color:red"> @ViewBag.ErrorMessage </p>
+    }
+    @if (TempData != null)
+    {
+        <p style="color:red"> @TempData["ErrorMessage"] </p>
+    }
+    <div class="container2">
+        <h2>Oturum Açın</h2>
+        <form asp-action="JointLoginPage" method="post">
+            <label for="Number">Number:</label>
+            <input type="text" id="Number" name="Number" required>
+            <button type="submit" asp-action="JointLoginPage">Oturum Aç</button>
+        </form>
+    </div>
+</body>
+
+

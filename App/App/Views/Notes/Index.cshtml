@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Model Listesi</title>
-    <link rel="stylesheet" href="~/css/tablo.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/notes-index.css" asp-append-version="true" />
 </head>
 <body>
     <header class="header1">
@@ -40,7 +40,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var notes in Model@* ?? Enumerable.Empty<App.Entities.Notes>()*@)
+                    @foreach (var notes in Model ?? Enumerable.Empty<App.Entities.Notes>())
                     {
                         <tr>
                             <td>@notes.ID</td>

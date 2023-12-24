@@ -68,21 +68,58 @@ namespace Web_API.Controllers
         }
 
 
+
+        [HttpGet("api/Student/Get/WithID/{Number}")]
+        public ActionResult<IEnumerable<Student>> GetStudentWithNumber(string Number)
+        {
+            try
+            {
+                var student = _context.Students.FirstOrDefault(x => x.Number == Number);
+
+                List<Student> studentList = new List<Student>();
+                if (student != null) studentList.Add(student);
+
+                if (student != null)
+                {
+                    return Ok(studentList);
+                }
+                else
+                {
+                    return NotFound();
+                }
+            }
+            catch (Exception)
+            {
+                return UnprocessableEntity();
+            }
+        }
+
+
+
         [HttpPost("api/Student/Post/Create")]
         public ActionResult<Student> CreateStudent(Student student)
         {
             if (ModelState.IsValid)
             {
-                student.IsActive = true;
-                _context.Students.Add(student);
-                _context.SaveChanges();
-                return Ok();
+                Student? studentData = _context.Students.FirstOrDefault(x => x.Number == student.Number);
+                if (studentData != null)
+                {
+                    return Ok();
+                }
+                else
+                {
+                    student.IsActive = true;
+                    _context.Students.Add(student);
+                    _context.SaveChanges();
+                    return Ok(student);
+                }
             }
             else
             {
                 return UnprocessableEntity();
             }
         }
+
 
 
         [HttpPost("api/Student/Post/Update")]

@@ -7,7 +7,9 @@ using Microsoft.AspNetCore.Mvc;
 using App.Managers;
 using Newtonsoft.Json;
 using App.Entities;
-using System.Text;
+using App.Builders;
+using App.Enums;
+using Microsoft.AspNetCore.Authorization;
 
 namespace App.Controllers
 {
@@ -21,6 +23,7 @@ namespace App.Controllers
         }
 
 
+        [Authorize]
         [HttpGet]
         public IActionResult Index()
         {
@@ -28,6 +31,7 @@ namespace App.Controllers
         }
 
 
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> Index(string Number)
         {
@@ -38,7 +42,12 @@ namespace App.Controllers
             }
             try
             {
-                string dockerApiUrl = "https://localhost:7242/api/Notes/" + Number;
+                string dockerApiUrl = new ApiUrlBuilder(UrlTypeEnum.api)
+                    .AddEntities(EntitiesEnum.Notes)
+                    .AddRequest(RequestEnum.Get)
+                    .AddMethod(MethodEnum.WithNumber)
+                    .AddParameter(Number)
+                    .Build();
                 var result = await _requestFactory.SendHttpGetRequest(dockerApiUrl);
                 var model = JsonConvert.DeserializeObject<List<Notes>>(result);
                 return View(model);

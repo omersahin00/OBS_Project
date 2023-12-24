@@ -1,4 +1,6 @@
-﻿namespace App;
+﻿using Microsoft.AspNetCore.Authentication.Cookies;
+
+namespace App;
 
 public class Program
 {
@@ -9,6 +11,15 @@ public class Program
         // Add services to the container.
         builder.Services.AddControllersWithViews();
         builder.Services.AddHttpClient();
+
+
+        builder.Services.AddAuthentication(
+            CookieAuthenticationDefaults.AuthenticationScheme)
+            .AddCookie(option => {
+                option.LoginPath = "/Account/JointLoginPage";
+            }
+        );
+
 
         var app = builder.Build();
 
@@ -22,6 +33,8 @@ public class Program
 
         app.UseHttpsRedirection();
         app.UseStaticFiles();
+
+        app.UseAuthentication();
 
         app.UseRouting();
 

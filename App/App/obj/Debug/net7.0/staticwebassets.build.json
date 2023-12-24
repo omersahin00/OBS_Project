@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "VGqFor98qlg8IZbPKhwF4jieeD7W9CfXpZDemq+XED0=",
+  "Hash": "yRDXVAHZ1aJKirnYZsXKR5cFJGt/liiiVSjodZWYOHE=",
   "Source": "App",
   "BasePath": "_content/App",
   "Mode": "Default",
@@ -51,12 +51,12 @@
       "OriginalItemSpec": "/Users/omersahin/Desktop/OBS_Project/App/App/obj/Debug/net7.0/scopedcss/projectbundle/App.bundle.scp.css"
     },
     {
-      "Identity": "/Users/omersahin/Desktop/OBS_Project/App/App/wwwroot/css/create.css",
+      "Identity": "/Users/omersahin/Desktop/OBS_Project/App/App/wwwroot/css/account-login.css",
       "SourceId": "App",
       "SourceType": "Discovered",
       "ContentRoot": "/Users/omersahin/Desktop/OBS_Project/App/App/wwwroot/",
       "BasePath": "_content/App",
-      "RelativePath": "css/create.css",
+      "RelativePath": "css/account-login.css",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -65,7 +65,24 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot/css/create.css"
+      "OriginalItemSpec": "wwwroot/css/account-login.css"
+    },
+    {
+      "Identity": "/Users/omersahin/Desktop/OBS_Project/App/App/wwwroot/css/notes-index.css",
+      "SourceId": "App",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/omersahin/Desktop/OBS_Project/App/App/wwwroot/",
+      "BasePath": "_content/App",
+      "RelativePath": "css/notes-index.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/css/notes-index.css"
     },
     {
       "Identity": "/Users/omersahin/Desktop/OBS_Project/App/App/wwwroot/css/site.css",
@@ -85,12 +102,12 @@
       "OriginalItemSpec": "wwwroot/css/site.css"
     },
     {
-      "Identity": "/Users/omersahin/Desktop/OBS_Project/App/App/wwwroot/css/tablo.css",
+      "Identity": "/Users/omersahin/Desktop/OBS_Project/App/App/wwwroot/css/student-create.css",
       "SourceId": "App",
       "SourceType": "Discovered",
       "ContentRoot": "/Users/omersahin/Desktop/OBS_Project/App/App/wwwroot/",
       "BasePath": "_content/App",
-      "RelativePath": "css/tablo.css",
+      "RelativePath": "css/student-create.css",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -99,7 +116,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot/css/tablo.css"
+      "OriginalItemSpec": "wwwroot/css/student-create.css"
     },
     {
       "Identity": "/Users/omersahin/Desktop/OBS_Project/App/App/wwwroot/favicon.ico",

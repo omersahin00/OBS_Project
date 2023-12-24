@@ -9,7 +9,13 @@ namespace App.Enums
         Get,
 
         [Description("Post")]
-        Post
+        Post,
+
+        [Description("LoginEmployee")]
+        LoginEmployee,
+
+        [Description("LoginStudent")]
+        LoginStudent
     }
 }
 

@@ -5,16 +5,20 @@
       "PackagePath": "staticwebassets/App.bundle.scp.css"
     },
     {
-      "Id": "/Users/omersahin/Desktop/OBS_Project/App/App/wwwroot/css/create.css",
-      "PackagePath": "staticwebassets/css/create.css"
+      "Id": "/Users/omersahin/Desktop/OBS_Project/App/App/wwwroot/css/account-login.css",
+      "PackagePath": "staticwebassets/css/account-login.css"
+    },
+    {
+      "Id": "/Users/omersahin/Desktop/OBS_Project/App/App/wwwroot/css/notes-index.css",
+      "PackagePath": "staticwebassets/css/notes-index.css"
     },
     {
       "Id": "/Users/omersahin/Desktop/OBS_Project/App/App/wwwroot/css/site.css",
       "PackagePath": "staticwebassets/css/site.css"
     },
     {
-      "Id": "/Users/omersahin/Desktop/OBS_Project/App/App/wwwroot/css/tablo.css",
-      "PackagePath": "staticwebassets/css/tablo.css"
+      "Id": "/Users/omersahin/Desktop/OBS_Project/App/App/wwwroot/css/student-create.css",
+      "PackagePath": "staticwebassets/css/student-create.css"
     },
     {
       "Id": "/Users/omersahin/Desktop/OBS_Project/App/App/wwwroot/favicon.ico",

@@ -6,6 +6,9 @@ using App.Entities;
 using App.Managers;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using App.Builders;
+using App.Enums;
+using Microsoft.AspNetCore.Authorization;
 
 namespace App.Controllers
 {
@@ -18,8 +21,8 @@ namespace App.Controllers
             _requestFactory = new HttpRequestManager(httpClientFactory);
         }
 
-        
 
+        [Authorize]
         [HttpGet]
         public async Task<IActionResult> Index()
         {
@@ -31,7 +34,12 @@ namespace App.Controllers
 
             try
             {
-                string dockerApiUrl = "https://localhost:7242/api/Student/";
+                string dockerApiUrl = new ApiUrlBuilder(UrlTypeEnum.api)
+                    .AddEntities(EntitiesEnum.Student)
+                    .AddRequest(RequestEnum.Get)
+                    .AddMethod(MethodEnum.All)
+                    .Build();
+
                 var result = await _requestFactory.SendHttpGetRequest(dockerApiUrl);
                 var model = JsonConvert.DeserializeObject<List<Student>>(result);
                 return View(model);
@@ -44,14 +52,15 @@ namespace App.Controllers
         }
 
 
-
+        [Authorize(Roles = "Admin, Employee")]
         [HttpGet]
         public IActionResult Create()
         {
             return View();
         }
-        
 
+
+        [Authorize(Roles = "Admin, Employee")]
         [HttpPost]
         public async Task<IActionResult> Create(Student student)
         {
@@ -64,7 +73,11 @@ namespace App.Controllers
             {
                 try
                 {
-                    string dockerApiUrl = "https://localhost:7242/api/Student";
+                    string dockerApiUrl = new ApiUrlBuilder(UrlTypeEnum.api)
+                        .AddEntities(EntitiesEnum.Student)
+                        .AddRequest(RequestEnum.Post)
+                        .AddMethod(MethodEnum.Create)
+                        .Build();
                     string jsonProduct = JsonConvert.SerializeObject(student);
                     await _requestFactory.SendHttpPostRequest(dockerApiUrl, jsonProduct);
 
@@ -86,6 +99,7 @@ namespace App.Controllers
 
 
 
+        [Authorize(Roles = "Admin, Employee")]
         [HttpGet]
         public IActionResult Update()
         {
@@ -93,6 +107,8 @@ namespace App.Controllers
         }
 
 
+
+        [Authorize(Roles = "Admin, Employee")]
         [HttpPost]
         public async Task<IActionResult> Update(Student student)
         {
@@ -105,7 +121,11 @@ namespace App.Controllers
                 }
                 try
                 {
-                    string dockerApiUrl = "https://localhost:7242/api/StudentUpdate";
+                    string dockerApiUrl = new ApiUrlBuilder(UrlTypeEnum.api)
+                        .AddEntities(EntitiesEnum.Student)
+                        .AddRequest(RequestEnum.Post)
+                        .AddMethod(MethodEnum.Update)
+                        .Build();
                     student.IsActive = true;
                     string jsonProduct = JsonConvert.SerializeObject(student);
                     await _requestFactory.SendHttpPostRequest(dockerApiUrl, jsonProduct);
@@ -125,7 +145,6 @@ namespace App.Controllers
                 return View();
             }
         }
-
 
     }
 }
