@@ -22,7 +22,7 @@ namespace App.Controllers
         }
 
 
-        [Authorize]
+        [Authorize(Roles = "Admin, Employee")]
         [HttpGet]
         public async Task<IActionResult> Index()
         {
