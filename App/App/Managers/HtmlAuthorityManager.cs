@@ -15,24 +15,33 @@ namespace App.Managers
         }
 
 
-        public string GetDisplayVariable(int RequiredAuthority)
+        public string GetDisplayVariable(int AuthorityLavel)
 		{
-            // Daha sonra yazılacak:
-            // Daha sonra yazılacak:
-            // Daha sonra yazılacak:
-
             ClaimsPrincipal? currentUser = _httpContextAccessor.HttpContext?.User;
-            if (currentUser == null) return "";
+            string? claimRole = currentUser?.FindFirst(ClaimTypes.Role)?.Value;
+            RoleEnum roleEnum;
 
-            string? claimEmail = currentUser.FindFirst(ClaimTypes.Email)?.Value;
-            if (claimEmail == null) return "";
+            if (currentUser == null || claimRole == null)
+                roleEnum = RoleEnum.Default;
+            else
+                roleEnum = GetRoleEnum(claimRole);
 
-            
+
+            if (AuthorityLavel <= ((int)roleEnum))
+                return "block";
+            else
+                return "none";
+        }
 
 
-            return "";
-		}
-
+        public RoleEnum GetRoleEnum(string claimRole)
+        {
+            if (claimRole == RoleEnum.Admin.ToString()) return RoleEnum.Admin;
+            else if (claimRole == RoleEnum.Employee.ToString()) return RoleEnum.Employee;
+            else if (claimRole == RoleEnum.Student.ToString()) return RoleEnum.Student;
+            else if (claimRole == RoleEnum.Default.ToString()) return RoleEnum.Default;
+            else return RoleEnum.Null;
+        }
     }
 }
 

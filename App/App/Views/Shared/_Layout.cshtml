@@ -1,4 +1,7 @@
 ﻿@using System.Security.Claims
+@using App.Managers
+@inject HtmlAuthorityManager AuthorityManager
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -9,6 +12,7 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/App.styles.css" asp-append-version="true" />
+
 </head>
 <body>
     <header>
@@ -28,22 +32,22 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Student" asp-action="Index">Student-Index</a>
+                            <a style="display:@AuthorityManager.GetDisplayVariable(2)" class="nav-link text-dark" asp-area="" asp-controller="Student" asp-action="Index">Student-Index</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Student" asp-action="Create">Student-Create</a>
+                            <a style="display:@AuthorityManager.GetDisplayVariable(2)" class="nav-link text-dark" asp-area="" asp-controller="Student" asp-action="Create">Student-Create</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Student" asp-action="Update">Student-Update</a>
+                            <a style="display:@AuthorityManager.GetDisplayVariable(2)" class="nav-link text-dark" asp-area="" asp-controller="Student" asp-action="Update">Student-Update</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Notes" asp-action="Index">Notes-Index</a>
+                            <a style="display:@AuthorityManager.GetDisplayVariable(1)" class="nav-link text-dark" asp-area="" asp-controller="Notes" asp-action="Index">Notes-Index</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="JointLoginPage">Account-JointLoginPage</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Create">|Gizli|Account-Create</a>
+                            <a style="display:@AuthorityManager.GetDisplayVariable(3)" class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Create">|Gizli|Account-Create</a>
                         </li>
                     </ul>
                 </div>

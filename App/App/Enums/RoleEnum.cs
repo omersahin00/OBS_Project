@@ -3,13 +3,15 @@ namespace App.Enums
 {
 	public enum RoleEnum
 	{
+		Null = -1,
+
         Default = 0,
 
-        Admin = 1,
+		Student = 1,
 
 		Employee = 2,
 
-		Student = 3
+        Admin = 3,
 	}
 }
 

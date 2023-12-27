@@ -130,10 +130,18 @@ namespace App.Controllers
             if (loginReturnType == LoginReturnEnum.Accept)
             {
                 ViewBag.Message = "Giriş işlemi başarılı.";
+
+                RoleEnum roleEnum = RoleEnum.Default;
+
+                if (employee.UserNumber == "1111")
+                    roleEnum = RoleEnum.Admin;
+                else
+                    roleEnum = RoleEnum.Employee;
+
                 var claims = new List<Claim>
                 {
                     new Claim(ClaimTypes.Email, employee.UserNumber),
-                    new Claim(ClaimTypes.Role, RoleEnum.Employee.ToString())
+                    new Claim(ClaimTypes.Role, roleEnum.ToString())
                 };
                 var userIdentity = new ClaimsIdentity(claims, " ");
                 var authProporties = new AuthenticationProperties

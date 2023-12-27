@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authentication.Cookies;
+﻿using App.Managers;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace App;
 
@@ -11,6 +12,8 @@ public class Program
         // Add services to the container.
         builder.Services.AddControllersWithViews();
         builder.Services.AddHttpClient();
+        builder.Services.AddHttpContextAccessor();
+        builder.Services.AddSingleton<HtmlAuthorityManager>();
 
 
         builder.Services.AddAuthentication(
