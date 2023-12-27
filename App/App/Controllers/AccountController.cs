@@ -133,7 +133,7 @@ namespace App.Controllers
                 var claims = new List<Claim>
                 {
                     new Claim(ClaimTypes.Email, employee.UserNumber),
-                    new Claim(ClaimTypes.Role, EntitiesEnum.Employee.ToString())
+                    new Claim(ClaimTypes.Role, RoleEnum.Employee.ToString())
                 };
                 var userIdentity = new ClaimsIdentity(claims, " ");
                 var authProporties = new AuthenticationProperties
@@ -217,7 +217,7 @@ namespace App.Controllers
                 var claims = new List<Claim>
                 {
                     new Claim(ClaimTypes.Email, student.Number),
-                    new Claim(ClaimTypes.Role, EntitiesEnum.Student.ToString())
+                    new Claim(ClaimTypes.Role, RoleEnum.Student.ToString())
                 };
                 var userIdentity = new ClaimsIdentity(claims, " ");
                 var authProporties = new AuthenticationProperties
