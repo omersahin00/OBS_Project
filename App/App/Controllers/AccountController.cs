@@ -66,13 +66,13 @@ namespace App.Controllers
                 {
                     ViewBag.Message = "Employe geldi";
                     TempData["NewAccountNumber"] = Number;
-                    return RedirectToAction("EmployeeLogin", "Account"); // DAHA YAZILMADI !!!
+                    return RedirectToAction("EmployeeLogin", "Account");
                 }
                 else if (accountType == AccountTypeEnum.Student)
                 {
                     ViewBag.Message = "Student geldi";
                     TempData["NewAccountNumber"] = Number;
-                    return RedirectToAction("StudentLogin", "Account"); // DAHA YAZILMADI !!!
+                    return RedirectToAction("StudentLogin", "Account");
                 }
                 else
                 {
