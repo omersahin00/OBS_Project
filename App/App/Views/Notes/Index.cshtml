@@ -1,4 +1,7 @@
-﻿@model List<App.Entities.Notes>
+﻿@model List<App.Models.StudentNotesModel>
+@inject HtmlAuthorityManager AuthorityManager
+@using App.Managers
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -24,7 +27,8 @@
     {
         <p style="color:red"> @TempData["ErrorMessage"] </p>
     }
-    <div class="container1">
+
+    <div style="display:@AuthorityManager.GetDisplayVariable(2)" class="container1">
         @* Öğrencinin numarası alınacak: *@
         <form asp-action="Index" asp-controller="Notes" method="post">
             <p>
@@ -43,26 +47,40 @@
             <table class="notlar-table1">
                 <thead>
                     <tr>
-                        <th class="parameters">ID</th>
+                        @*<th class="parameters">ID</th>
                         <th class="parameters">Student Notes ID</th>
-                        <th class="parameters">Course ID</th>
-                        <th class="parameters">Score</th>
-                        <th class="parameters">Letter Score</th>
+                        <th class="parameters">Course ID</th>*@
+                        <th class="parameters">Ders Adı</th>
+                        <th class="parameters">Puan</th>
+                        <th class="parameters">Harf Notu</th>
                         <th class="parameters">Aktiflik</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var notes in Model ?? Enumerable.Empty<App.Entities.Notes>())
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Name</td>
+                            <td>@item.Score</td>
+                            <td>@item.LetterScore</td>
+                            <td>@item.IsActive</td>
+                        </tr>
+                    }
+
+
+                    @*@foreach (var item in Model ?? Enumerable.Empty<App.Models.StudentNotesModel>())
                     {
                         <tr>
                             <td>@notes.ID</td>
                             <td>@notes.StudentNotesID</td>
                             <td>@notes.CourseID</td>
+                            
                             <td>@notes.Score</td>
                             <td>@notes.LetterScore</td>
                             <td>@notes.IsActive</td>
                         </tr>
-                    }
+                    }*@
                 </tbody>
             </table>
         </div>
