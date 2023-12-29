@@ -46,6 +46,7 @@ namespace App.Controllers
 
 
 
+        // Bu bir fonksiyon:
         public async Task<IActionResult> GetViewPage(string Number)
         {
             if (_requestFactory == null)
@@ -58,7 +59,7 @@ namespace App.Controllers
                 string dockerApiUrl = new ApiUrlBuilder(UrlTypeEnum.api)
                     .AddEntities(EntitiesEnum.Notes)
                     .AddRequest(RequestEnum.Get)
-                    .AddMethod(MethodEnum.WithNumber)
+                    .AddMethod(MethodEnum.AllWithNumber)
                     .AddParameter(Number)
                     .Build();
                 var result1 = await _requestFactory.SendHttpGetRequest(dockerApiUrl);

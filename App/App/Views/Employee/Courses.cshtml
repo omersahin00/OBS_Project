@@ -1,0 +1,65 @@
+﻿@model List<App.Entities.Course>
+@inject HtmlAuthorityManager AuthorityManager
+@using App.Managers
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Model Listesi</title>
+    <link rel="stylesheet" href="~/css/notes-index.css" asp-append-version="true" />
+</head>
+<body>
+    <header class="header1">
+        <h1>Öğrencinin Notları</h1>
+    </header>
+    @if (ViewBag.Message != null)
+    {
+        <p style="color:green"> @ViewBag.Message </p>
+    }
+    @if (ViewBag.ErrorMessage != null)
+    {
+        <p style="color:red"> @ViewBag.ErrorMessage </p>
+    }
+    @if (TempData["Message"] != null)
+    {
+        <p style="color:red"> @TempData["Message"] </p>
+    }
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <p style="color:red"> @TempData["ErrorMessage"] </p>
+    }
+    @if (Model != null)
+    {
+        <div class="container1">
+            <table class="notlar-table1">
+                <thead>
+                    <tr>
+                        <th class="parameters">Ders Adı</th>
+                        <th class="parameters">Kredisi</th>
+                        <th class="parameters">Aktiflik</th>
+                        <th class="parameters">Bu Dersi Alan Öğrenciler</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Name</td>
+                            <td>@item.Credit</td>
+                            <td>@item.IsActive</td>
+                            <td>
+                                <form method="get" asp-action="CourseStudents" asp-controller="Student">
+                                    <button type="submit" name="CourseID" value="@item.ID">Öğrencileri Görüntüle</button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+</body>
+</html>

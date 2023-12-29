@@ -9,7 +9,6 @@ using Web_API.Entities;
 namespace Web_API.Controllers
 {
     [ApiController]
-    //[Route("api/[controller]")]
     public class CourseController : Controller
     {
         protected readonly SqlDbContext _context;
@@ -96,6 +95,33 @@ namespace Web_API.Controllers
                 return UnprocessableEntity();
             }
         }
+
+
+
+        [HttpGet("api/Course/Get/AllStudentWithID/{CourseID}")]
+        public ActionResult<IEnumerable<Student>> GetCourseStudents(int CourseID)
+        {
+            List<StudentActiveCourses> studentCoursesList = _context.StudentActiveCourses.Where(x => x.CourseID == CourseID).ToList();
+            
+            if (studentCoursesList != null)
+            {
+                List<Student> studentList = new List<Student>();
+                foreach (var item in studentCoursesList)
+                {
+                    Student? student = _context.Students.FirstOrDefault(x => x.ID == item.StudentID);
+                    if (student != null)
+                    {
+                        studentList.Add(student);
+                    }
+                }
+                return Ok(studentList);
+            }
+            else
+            {
+                return Ok();
+            }
+        }
+
 
 
         [HttpPost("api/Course/Post/Create")]

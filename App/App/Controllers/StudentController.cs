@@ -57,6 +57,39 @@ namespace App.Controllers
         }
 
 
+
+        [Authorize(Roles = "Admin, Employee")]
+        [HttpGet]
+        public async Task<IActionResult> CourseStudents(int CourseID)
+        {
+            if (_requestFactory == null)
+            {
+                ViewBag.ErrorMessage = "Talep oluşturulamadı!";
+                return View();
+            }
+
+            string dockerApiUrl = new ApiUrlBuilder(UrlTypeEnum.api)
+                .AddEntities(EntitiesEnum.Course)
+                .AddRequest(RequestEnum.Get)
+                .AddMethod(MethodEnum.AllStudentWithID)
+                .AddParameter(CourseID)
+                .Build();
+            var result = await _requestFactory.SendHttpGetRequest(dockerApiUrl);
+            if (result == string.Empty)
+            {
+                ViewBag.ErrorMessage = "API ile iletişim kurulamadı!";
+                return View();
+            }
+            List<Student>? model = JsonConvert.DeserializeObject<List<Student>>(result);
+            if (model != null)
+                return View(model);
+            else
+                return View();
+        }
+        
+
+
+
         [Authorize(Roles = "Admin, Employee")]
         [HttpGet]
         public IActionResult Create()

@@ -9,7 +9,6 @@ using Web_API.Entities;
 namespace Web_API.Controllers
 {
     [ApiController]
-    //[Route("api/[controller]")]
     public class StudentController : Controller
     {
         protected readonly SqlDbContext _context;

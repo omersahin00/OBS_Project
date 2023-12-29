@@ -20,6 +20,9 @@ namespace App.Enums
         [Description("Employee")]
         Employee,
 
+        [Description("EmployeeCourses")]
+        EmployeeCourses,
+
         [Description("Admin")]
         Admin
 	}

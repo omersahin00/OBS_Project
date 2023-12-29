@@ -20,7 +20,7 @@ namespace Web_API.Controllers
         }
 
 
-        [HttpGet("api/Notes/Get/WithNumber/{Number}")]
+        [HttpGet("api/Notes/Get/AllWithNumber/{Number}")]
         public ActionResult<IEnumerable<Notes>> GetStudentAllNotes(string Number)
         {
             // Öğrencinin aldığı tüm notları döndürüyor:
@@ -42,6 +42,43 @@ namespace Web_API.Controllers
             catch (Exception)
             {
                 return UnprocessableEntity();
+            }
+        }
+
+
+
+        [HttpGet("api/Notes/Get/CourseWithNumber/{Number}")]
+        public ActionResult<IEnumerable<Course>> GetStudentAllCourses(string Number)
+        {
+            // Öğrencinin aldığı tüm dersleri döndürüyor:
+
+            var student = _context.Students.FirstOrDefault(x => x.Number == Number);
+            List<StudentActiveCourses> studentActiveCourseList;
+            List<Course> courseList = new List<Course>();
+
+            if (student != null)
+            {
+                studentActiveCourseList = _context.StudentActiveCourses.Where(x => x.StudentID == student.StudentNotesID).ToList();
+                if (studentActiveCourseList != null)
+                {
+                    foreach (var item in studentActiveCourseList)
+                    {
+                        Course? course = _context.Courses.FirstOrDefault(x => x.ID == item.CourseID);
+                        if (course != null)
+                        {
+                            courseList.Add(course);
+                        }
+                    }
+                    return Ok(courseList);
+                }
+                else
+                {
+                    return Ok();
+                }
+            }
+            else
+            {
+                return Ok();
             }
         }
 

@@ -8,7 +8,7 @@ namespace Web_API.Entities
 		[Key]
 		public int ID { get; set; }
 
-		public int EmployeeID { get; set; }
+		public string? EmployeeNumber { get; set; }
 
 		public int CourseID { get; set; }
 	}

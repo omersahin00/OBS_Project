@@ -20,6 +20,15 @@ namespace App.Enums
         [Description("All")]
         All,
 
+        [Description("AllWithNumber")]
+        AllWithNumber,
+
+        [Description("AllStudentWithID")]
+        AllStudentWithID,
+
+        [Description("CourseWithNumber")]
+        CourseWithNumber,
+
         [Description("CheckNumber")]
         CheckNumber
     }

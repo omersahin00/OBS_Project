@@ -1,0 +1,67 @@
+﻿@model List<App.Entities.Student>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Students</title>
+    <link rel="stylesheet" href="~/css/notes-index.css" asp-append-version="true" />
+</head>
+<body>
+    <header class="header1">
+        <h1>Öğrenciler</h1>
+    </header>
+
+    <div class="container1">
+        <table class="notlar-table1">
+            <thead>
+                <tr>
+                    <th class="parameters">Numara</th>
+                    <th class="parameters">İsim</th>
+                    <th class="parameters">Soyisim</th>
+                    <th class="parameters">Aktif notları ID</th>
+                    <th class="parameters">Şifre</th>
+                    <th class="parameters">Aktiflik</th>
+                    <th class="parameters">Not Görüntüle</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var student in Model ?? Enumerable.Empty<App.Entities.Student>())
+                {
+                    <tr>
+                        <td>@student.Number</td>
+                        <td>@student.FirstName</td>
+                        <td>@student.LastName</td>
+                        <td>@student.StudentNotesID</td>
+                        <td>@student.Password</td>
+                        <td>@student.IsActive</td>
+                        <td>
+                            <form method="post" asp-action="Index" asp-controller="Notes">
+                                <button type="submit" name="Number" value="@student.Number">Notlarını Görüntüle</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        @if (ViewBag.Message != null)
+        {
+            <p> @ViewBag.Message </p>
+        }
+        @if (ViewBag.ErrorMessage != null)
+        {
+            <p> @ViewBag.ErrorMessage </p>
+        }
+        @if (TempData["Message"] != null)
+        {
+            <p style="color:red"> @TempData["Message"] </p>
+        }
+        @if (TempData["ErrorMessage"] != null)
+        {
+            <p style="color:red"> @TempData["ErrorMessage"] </p>
+        }
+    </div>
+
+</body>
+</html>
