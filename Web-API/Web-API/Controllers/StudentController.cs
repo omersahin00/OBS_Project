@@ -99,22 +99,29 @@ namespace Web_API.Controllers
         [HttpPost("api/Student/Post/Create")]
         public ActionResult<Student> CreateStudent(Student student)
         {
-            if (ModelState.IsValid)
+            try
             {
-                Student? studentData = _context.Students.FirstOrDefault(x => x.Number == student.Number);
-                if (studentData != null)
+                if (ModelState.IsValid)
                 {
-                    return Ok();
+                    Student? studentData = _context.Students.FirstOrDefault(x => x.Number == student.Number);
+                    if (studentData != null)
+                    {
+                        return Ok();
+                    }
+                    else
+                    {
+                        student.IsActive = true;
+                        _context.Students.Add(student);
+                        _context.SaveChanges();
+                        return Ok(student);
+                    }
                 }
                 else
                 {
-                    student.IsActive = true;
-                    _context.Students.Add(student);
-                    _context.SaveChanges();
-                    return Ok(student);
+                    return UnprocessableEntity();
                 }
             }
-            else
+            catch (Exception)
             {
                 return UnprocessableEntity();
             }

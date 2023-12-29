@@ -3,5 +3,22 @@
 }
 <h1>@ViewData["Title"]</h1>
 
+@if (ViewBag.Message != null)
+{
+    <p style="color:green"> @ViewBag.Message </p>
+}
+@if (ViewBag.ErrorMessage != null)
+{
+    <p style="color:red"> @ViewBag.ErrorMessage </p>
+}
+@if (TempData["Message"] != null)
+{
+    <p style="color:red"> @TempData["Message"] </p>
+}
+@if (TempData["ErrorMessage"] != null)
+{
+    <p style="color:red"> @TempData["ErrorMessage"] </p>
+}
+
 <p>Use this page to detail your site's privacy policy.</p>
 

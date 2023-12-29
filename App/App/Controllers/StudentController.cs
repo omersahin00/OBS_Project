@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 using App.Entities;
 using App.Managers;
 using Microsoft.AspNetCore.Mvc;
@@ -39,7 +39,6 @@ namespace App.Controllers
                     .AddRequest(RequestEnum.Get)
                     .AddMethod(MethodEnum.All)
                     .Build();
-
                 var result = await _requestFactory.SendHttpGetRequest(dockerApiUrl);
                 if (result == string.Empty)
                 {

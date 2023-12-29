@@ -6,7 +6,8 @@ namespace Web_API.Enums
 		Admin,
 		Employee,
 		Student,
-		Null
+		Null,
+		TryCatchError
 	}
 }
 

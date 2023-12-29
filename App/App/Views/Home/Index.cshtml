@@ -5,6 +5,22 @@
 <p> @ViewBag.Message </p>
 
 <div class="text-center">
+    @if (ViewBag.Message != null)
+    {
+        <p style="color:green"> @ViewBag.Message </p>
+    }
+    @if (ViewBag.ErrorMessage != null)
+    {
+        <p style="color:red"> @ViewBag.ErrorMessage </p>
+    }
+    @if (TempData["Message"] != null)
+    {
+        <p style="color:red"> @TempData["Message"] </p>
+    }
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <p style="color:red"> @TempData["ErrorMessage"] </p>
+    }
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>

@@ -50,14 +50,21 @@ namespace Web_API.Controllers
         [HttpPost("api/Notes/Post/Create")]
         public ActionResult<Notes> CreateStudentNote(Student student)
         {
-            if (ModelState.IsValid)
+            try
             {
-                student.IsActive = true;
-                _context.Students.Add(student);
-                _context.SaveChanges();
-                return Ok();
+                if (ModelState.IsValid)
+                {
+                    student.IsActive = true;
+                    _context.Students.Add(student);
+                    _context.SaveChanges();
+                    return Ok();
+                }
+                else
+                {
+                    return UnprocessableEntity();
+                }
             }
-            else
+            catch (Exception)
             {
                 return UnprocessableEntity();
             }

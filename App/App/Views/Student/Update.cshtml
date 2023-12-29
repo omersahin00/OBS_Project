@@ -17,6 +17,14 @@
     {
         <p> @ViewBag.ErrorMessage </p>
     }
+    @if (TempData["Message"] != null)
+    {
+        <p style="color:red"> @TempData["Message"] </p>
+    }
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <p style="color:red"> @TempData["ErrorMessage"] </p>
+    }
     <div class="container2">
         <h2>Student Update Form</h2>
         <form asp-action="Update" asp-controller="Student" method="post">

@@ -99,22 +99,29 @@ namespace Web_API.Controllers
         [HttpPost("api/Employee/Post/Create")]
         public ActionResult<Employee> CreateEmployee(Employee employee)
         {
-            if (ModelState.IsValid)
+            try
             {
-                Employee? employeeData = _context.Employees.FirstOrDefault(x => x.UserNumber == employee.UserNumber);
-                if (employeeData != null)
+                if (ModelState.IsValid)
                 {
-                    return Ok();
+                    Employee? employeeData = _context.Employees.FirstOrDefault(x => x.UserNumber == employee.UserNumber);
+                    if (employeeData != null)
+                    {
+                        return Ok();
+                    }
+                    else
+                    {
+                        employee.IsActive = true;
+                        _context.Employees.Add(employee);
+                        _context.SaveChanges();
+                        return Ok(employee);
+                    }
                 }
                 else
                 {
-                    employee.IsActive = true;
-                    _context.Employees.Add(employee);
-                    _context.SaveChanges();
-                    return Ok(employee);
+                    return UnprocessableEntity();
                 }
             }
-            else
+            catch (Exception)
             {
                 return UnprocessableEntity();
             }

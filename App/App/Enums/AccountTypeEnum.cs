@@ -6,7 +6,8 @@ namespace App.Enums
 		Admin,
 		Empolyee,
 		Student,
-		Null
-	}
+		Null,
+        TryCatchError
+    }
 }
 

@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Web_API.Concrete;
 
@@ -10,9 +11,11 @@ using Web_API.Concrete;
 namespace Web_API.Migrations
 {
     [DbContext(typeof(SqlDbContext))]
-    partial class SqlDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231229184913_mig14")]
+    partial class mig14
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -69,25 +72,6 @@ namespace Web_API.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("Employees");
-                });
-
-            modelBuilder.Entity("Web_API.Entities.EmployeeCourses", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
-
-                    b.Property<int>("CourseID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("EmployeeID")
-                        .HasColumnType("int");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("EmployeeCourses");
                 });
 
             modelBuilder.Entity("Web_API.Entities.Notes", b =>

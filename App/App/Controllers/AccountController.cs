@@ -1,15 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Reflection;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using App.Managers;
 using Newtonsoft.Json;
 using App.Entities;
 using App.Builders;
 using App.Enums;
-using System.Reflection;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
@@ -60,19 +60,23 @@ namespace App.Controllers
 
             AccountTypeEnum accountType = JsonConvert.DeserializeObject<AccountTypeEnum>(result);
 
-            if (accountType != AccountTypeEnum.Null)
+            if (accountType != AccountTypeEnum.TryCatchError)
             {
                 if (accountType == AccountTypeEnum.Empolyee)
                 {
-                    ViewBag.Message = "Employe geldi";
                     TempData["NewAccountNumber"] = Number;
                     return RedirectToAction("EmployeeLogin", "Account");
                 }
                 else if (accountType == AccountTypeEnum.Student)
                 {
-                    ViewBag.Message = "Student geldi";
                     TempData["NewAccountNumber"] = Number;
                     return RedirectToAction("StudentLogin", "Account");
+                }
+                else if (accountType == AccountTypeEnum.Null)
+                {
+                    TempData["ErrorMessage"] = "Böyle bir kullanıcı mevcut değil. Oluşturun:";
+                    TempData["NewAccountNumber"] = Number;
+                    return RedirectToAction("Create", "Account");
                 }
                 else
                 {
@@ -82,7 +86,7 @@ namespace App.Controllers
             }
             else
             {
-                ViewBag.ErrorMessage = "Böyle bir kullanıcı mevcut değil.";
+                TempData["ErrorMessage"] = "Bir hata meydana geldi!";
                 TempData["NewAccountNumber"] = Number;
                 return RedirectToAction("Create", "Account");
             }
@@ -131,7 +135,7 @@ namespace App.Controllers
             {
                 ViewBag.Message = "Giriş işlemi başarılı.";
 
-                RoleEnum roleEnum = RoleEnum.Default;
+                RoleEnum roleEnum;
 
                 if (employee.UserNumber == "1111")
                     roleEnum = RoleEnum.Admin;

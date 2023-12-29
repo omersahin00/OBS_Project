@@ -1,15 +1,14 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Web_API.Entities
+namespace App.Entities
 {
-	public class StudentActiveLessons
+	public class EmployeeCourses
 	{
         [Key]
         public int ID { get; set; }
 
-        public int StudentID { get; set; }
+        public int EmployeeID { get; set; }
 
         public int CourseID { get; set; }
     }

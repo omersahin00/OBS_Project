@@ -5,12 +5,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Model Listesi</title>
+    <title>Students</title>
     <link rel="stylesheet" href="~/css/notes-index.css" asp-append-version="true" />
 </head>
 <body>
     <header class="header1">
-        <h1>Öğrencinin Notları</h1>
+        <h1>Öğrenciler</h1>
     </header>
 
     <div class="container1">
@@ -23,6 +23,7 @@
                     <th class="parameters">Aktif notları ID</th>
                     <th class="parameters">Şifre</th>
                     <th class="parameters">Aktiflik</th>
+                    <th class="parameters">Not Görüntüle</th>
                 </tr>
             </thead>
             <tbody>
@@ -35,13 +36,30 @@
                         <td>@student.StudentNotesID</td>
                         <td>@student.Password</td>
                         <td>@student.IsActive</td>
+                        <td>
+                            <form method="post" asp-action="Index" asp-controller="Notes">
+                                <button type="submit" name="Number" value="@student.Number">Notlarını Görüntüle</button>
+                            </form>
+                        </td>
                     </tr>
                 }
             </tbody>
         </table>
+        @if (ViewBag.Message != null)
+        {
+            <p> @ViewBag.Message </p>
+        }
         @if (ViewBag.ErrorMessage != null)
         {
             <p> @ViewBag.ErrorMessage </p>
+        }
+        @if (TempData["Message"] != null)
+        {
+            <p style="color:red"> @TempData["Message"] </p>
+        }
+        @if (TempData["ErrorMessage"] != null)
+        {
+            <p style="color:red"> @TempData["ErrorMessage"] </p>
         }
     </div>
 

@@ -15,7 +15,11 @@
     {
         <p style="color:red"> @ViewBag.ErrorMessage </p>
     }
-    @if (TempData != null)
+    @if (TempData["Message"] != null)
+    {
+        <p style="color:red"> @TempData["Message"] </p>
+    }
+    @if (TempData["ErrorMessage"] != null)
     {
         <p style="color:red"> @TempData["ErrorMessage"] </p>
     }

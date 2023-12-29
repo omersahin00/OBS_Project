@@ -14,8 +14,9 @@ namespace Web_API.Concrete
         public DbSet<Student> Students { get; set; }
         public DbSet<Notes> Notes { get; set; }
         public DbSet<Course> Courses { get; set; }
-        public DbSet<StudentActiveLessons> StudentActiveLessons { get; set; }
+        public DbSet<StudentActiveCourses> StudentActiveCourses { get; set; }
         public DbSet<Employee> Employees { get; set; }
+        public DbSet<EmployeeCourses> EmployeeCourses { get; set; }
     }
 }
 

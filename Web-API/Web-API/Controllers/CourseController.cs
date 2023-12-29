@@ -71,12 +71,12 @@ namespace Web_API.Controllers
             try
             {
                 var student = _context.Students.FirstOrDefault(x => x.Number == Number);
-                List<StudentActiveLessons> studentActiveLessonIDList;
+                List<StudentActiveCourses> studentActiveLessonIDList;
                 List<Course> studentCourseList = new List<Course>();
 
                 if (student != null && student.ID != 0)
                 {
-                    studentActiveLessonIDList = _context.StudentActiveLessons.Where(x => x.StudentID == student.ID).ToList();
+                    studentActiveLessonIDList = _context.StudentActiveCourses.Where(x => x.StudentID == student.ID).ToList();
                     foreach (var item in studentActiveLessonIDList)
                     {
                         var course = _context.Courses.FirstOrDefault(x => x.ID == item.CourseID);
@@ -101,14 +101,21 @@ namespace Web_API.Controllers
         [HttpPost("api/Course/Post/Create")]
         public ActionResult<Course> CreateStudentCourse(Course course)
         {
-            if (ModelState.IsValid)
+            try
             {
-                course.IsActive = true;
-                _context.Courses.Add(course);
-                _context.SaveChanges();
-                return Ok();
+                if (ModelState.IsValid)
+                {
+                    course.IsActive = true;
+                    _context.Courses.Add(course);
+                    _context.SaveChanges();
+                    return Ok();
+                }
+                else
+                {
+                    return UnprocessableEntity();
+                }
             }
-            else
+            catch (Exception)
             {
                 return UnprocessableEntity();
             }
@@ -154,7 +161,6 @@ namespace Web_API.Controllers
                 return UnprocessableEntity();
             }
         }
-
     }
 }
 

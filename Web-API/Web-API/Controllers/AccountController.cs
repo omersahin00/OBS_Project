@@ -22,20 +22,27 @@ namespace Web_API.Controllers
 
         [HttpGet("api/Account/Get/CheckNumber/{Number}")]
         public ActionResult<IEnumerable<AccountTypeEnum>> CheckNumber(string Number)
-        {   
-            Employee? employee = _context.Employees.FirstOrDefault(x => x.UserNumber == Number);
-            if (employee != null)
+        {
+            try
             {
-                return Ok(AccountTypeEnum.Employee);
-            }
+                Employee? employee = _context.Employees.FirstOrDefault(x => x.UserNumber == Number);
+                if (employee != null)
+                {
+                    return Ok(AccountTypeEnum.Employee);
+                }
 
-            Student? student = _context.Students.FirstOrDefault(x => x.Number == Number);
-            if (student != null)
-            {
-                return Ok(AccountTypeEnum.Student);
+                Student? student = _context.Students.FirstOrDefault(x => x.Number == Number);
+                if (student != null)
+                {
+                    return Ok(AccountTypeEnum.Student);
+                }
+                else
+                    return Ok(AccountTypeEnum.Null);
             }
-            else
-                return Ok(AccountTypeEnum.Null);
+            catch (Exception)
+            {
+                return Ok(AccountTypeEnum.TryCatchError);
+            }
         }
 
 
@@ -97,9 +104,6 @@ namespace Web_API.Controllers
                 return Ok(LoginReturnEnum.Null);
             }
         }
-
-
-        
     }
 }
 
