@@ -125,7 +125,7 @@ namespace Web_API.Controllers
 
 
         [HttpPost("api/Course/Post/Create")]
-        public ActionResult<Course> CreateStudentCourse(Course course)
+        public ActionResult<Course> CreateCourse(Course course)
         {
             try
             {

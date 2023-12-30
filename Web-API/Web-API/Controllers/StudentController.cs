@@ -1,11 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
+using Web_API.Enums;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using Web_API.Models;
 using Web_API.Concrete;
 using Web_API.Entities;
-using Web_API.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Web_API.Controllers
 {
@@ -132,6 +133,44 @@ namespace Web_API.Controllers
                 return NotFound();
             }
         }
+
+
+
+
+        [HttpPost("api/Student/Post/CourseRegistration/{Number}")]
+        public ActionResult<CourseRegistrationsEnum> CourseRegistration(string Number, List<CourseRegistration> courses)
+        {
+            // StudentActiveCourses ve Notes tabloları doldurulacak.
+            if (ModelState.IsValid)
+            {
+                Student? student = _context.Students.FirstOrDefault(x => x.Number == Number);
+                if (student == null)
+                {
+                    return Ok(CourseRegistrationsEnum.Null);
+                }
+
+                // StudentActiveCourses Tablosuna Veriler Kaydediliyor:
+                foreach (var course in courses)
+                {
+                    StudentActiveCourses studentActiveCourses = new StudentActiveCourses();
+                    studentActiveCourses.StudentID = student.ID;
+                    studentActiveCourses.CourseID = course.CourseID;
+                    _context.StudentActiveCourses.Add(studentActiveCourses);
+                }
+                _context.SaveChanges();
+
+
+                // Notes Tablosuna Veriler Kaydedilecek: !!!
+                
+            }
+            else
+            {
+                return Ok(CourseRegistrationsEnum.Error);
+            }
+        }
+
+
+
 
 
 

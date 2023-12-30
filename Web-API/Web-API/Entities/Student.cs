@@ -14,7 +14,8 @@ namespace Web_API.Entities
         public string? FirstName { get; set; }
 
         public string? LastName { get; set; }
-        
+
+        // ID ile bire bir aynı olacak:
         public int StudentNotesID { get; set; }
 
         public string? Password { get; set; }

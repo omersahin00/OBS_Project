@@ -32,6 +32,9 @@ namespace App.Enums
         [Description("CourseWithNumber")]
         CourseWithNumber,
 
+        [Description("CourseRegistration")]
+        CourseRegistration,
+
         [Description("CheckNumber")]
         CheckNumber
     }
