@@ -51,9 +51,6 @@
             <table class="notlar-table1">
                 <thead>
                     <tr>
-                        @*<th class="parameters">ID</th>
-                            <th class="parameters">Student Notes ID</th>
-                            <th class="parameters">Course ID</th>*@
                         <th class="parameters">Ders Adı</th>
                         <th class="parameters">Puan</th>
                         <th class="parameters">Harf Notu</th>
@@ -71,20 +68,6 @@
                             <td>@item.IsActive</td>
                         </tr>
                     }
-
-
-                    @*@foreach (var item in Model ?? Enumerable.Empty<App.Models.StudentNotesModel>())
-                        {
-                            <tr>
-                                <td>@notes.ID</td>
-                                <td>@notes.StudentNotesID</td>
-                                <td>@notes.CourseID</td>
-
-                                <td>@notes.Score</td>
-                                <td>@notes.LetterScore</td>
-                                <td>@notes.IsActive</td>
-                            </tr>
-                        }*@
                 </tbody>
             </table>
         </div>

@@ -159,18 +159,26 @@ namespace Web_API.Controllers
                 }
                 _context.SaveChanges();
 
+                // Notes Tablosuna Veriler Keydediliyor:
+                foreach (var course in courses)
+                {
+                    Notes notes = new Notes();
+                    notes.StudentNotesID = student.StudentNotesID;
+                    notes.CourseID = course.CourseID;
+                    notes.Score = 0;
+                    notes.LetterScore = "";
+                    notes.IsActive = true;
+                    _context.Notes.Add(notes);
+                }
+                _context.SaveChanges();
 
-                // Notes Tablosuna Veriler Kaydedilecek: !!!
-                
+                return Ok(CourseRegistrationsEnum.Accept);
             }
             else
             {
                 return Ok(CourseRegistrationsEnum.Error);
             }
         }
-
-
-
 
 
 

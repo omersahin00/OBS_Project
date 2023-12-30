@@ -3,10 +3,10 @@ namespace Web_API.Enums
 {
 	public enum CourseRegistrationsEnum
 	{
-		Accept,
-		Decline,
-		Error,
-		Null
+		Error = -1,
+		Null = 0,
+		Accept = 1,
+		Decline = 2
 	}
 }
 

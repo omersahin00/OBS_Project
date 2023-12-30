@@ -64,6 +64,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[/Users/omersahin/Desktop/OBS_Project/App/App/Views/Student/CourseRegistration.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU3R1ZGVudC9Db3Vyc2VSZWdpc3RyYXRpb24uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [/Users/omersahin/Desktop/OBS_Project/App/App/Views/Student/CourseStudents.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU3R1ZGVudC9Db3Vyc2VTdHVkZW50cy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 

@@ -9,6 +9,8 @@ using Newtonsoft.Json;
 using App.Builders;
 using App.Enums;
 using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
+using App.Models;
 
 namespace App.Controllers
 {
@@ -85,7 +87,125 @@ namespace App.Controllers
             else
                 return View();
         }
-        
+
+
+
+
+        // Öncelikle tüm dersler çekilecek. Ve checkbox ile seçilen dersler post işlemi ile gönderilecek:
+        // Birer adet Get, Post methodları yazılacak:
+
+        [Authorize]
+        [HttpGet]
+        public async Task<IActionResult> CourseRegistration()
+        {
+            string? Number = User.FindFirst(ClaimTypes.Email)?.Value;
+            if (Number == null)
+            {
+                ViewBag.ErrorMessage = "Bir hata oluştu. Oturum açılmamış.";
+                return View();
+            }
+
+            string dockerApiUrl = new ApiUrlBuilder(UrlTypeEnum.api)
+                .AddEntities(EntitiesEnum.Course)
+                .AddRequest(RequestEnum.Get)
+                .AddMethod(MethodEnum.All)
+                .Build();
+            var result = await _requestFactory.SendHttpGetRequest(dockerApiUrl);
+            if (result == string.Empty)
+            {
+                ViewBag.ErrorMessage = "API ile iletişim kurulamadı!";
+                return View();
+            }
+            List<Course>? model1 = JsonConvert.DeserializeObject<List<Course>>(result);
+
+
+            // Öğrencinin hali hazırda aldığı dersler alınacak ve almadığı dersler listelenerek view dosyasına gönderilecek:
+            dockerApiUrl = new ApiUrlBuilder(UrlTypeEnum.api)
+                .AddEntities(EntitiesEnum.Course)
+                .AddRequest(RequestEnum.Get)
+                .AddMethod(MethodEnum.WithNumber)
+                .AddParameter(Number)
+                .Build();
+            var result2 = await _requestFactory.SendHttpGetRequest(dockerApiUrl);
+            if (result2 == string.Empty)
+            {
+                ViewBag.ErrorMessage = "API ile iletişim kurulamadı!";
+                return View();
+            }
+            List<Course>? model2 = JsonConvert.DeserializeObject<List<Course>>(result2);
+
+            if (model1 == null || model2 == null)
+            {
+                ViewBag.ErrorMessage = "Api'den veriler alınamadı.";
+                return View();
+            }
+
+            for (int i = model1.Count - 1; i >= 0; i--)
+            {
+                var course = model1[i];
+                Course? studentActiveCourses = model2.FirstOrDefault(x => x.ID == course.ID);
+                if (studentActiveCourses != null)
+                {
+                    model1.Remove(course);
+                }
+            }
+            return View(model1);
+        }
+
+
+
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> CourseRegistration(List<int> selectedCoursesID)
+        {
+            string? Number = User.FindFirst(ClaimTypes.Email)?.Value;
+            if (Number == null)
+            {
+                ViewBag.ErrorMessage = "Bir hata oluştu. Oturum açılmamış.";
+                return View();
+            }
+
+            // CourseRegistration modelinden bir liste oluşturularak o liste gönderilecek.
+            List<CourseRegistration> courseList = new List<CourseRegistration>();
+            foreach (var courseID in selectedCoursesID)
+            {
+                CourseRegistration courseRegistration = new CourseRegistration();
+                courseRegistration.CourseID = courseID;
+                courseList.Add(courseRegistration);
+            }
+            string dockerApiUrl = new ApiUrlBuilder(UrlTypeEnum.api)
+                .AddEntities(EntitiesEnum.Student)
+                .AddRequest(RequestEnum.Post)
+                .AddMethod(MethodEnum.CourseRegistration)
+                .AddParameter(Number)
+                .Build();
+            string jsonProduct = JsonConvert.SerializeObject(courseList);
+            var result = await _requestFactory.SendHttpPostRequest(dockerApiUrl, jsonProduct);
+            CourseRegistrationsEnum enumType = JsonConvert.DeserializeObject<CourseRegistrationsEnum>(result);
+
+            if (enumType == CourseRegistrationsEnum.Accept)
+            {
+                ViewBag.Message = "İşlem başarılı.";
+            }
+            else if (enumType == CourseRegistrationsEnum.Decline)
+            {
+                ViewBag.Message = "Talep reddedildi!";
+            }
+            else if (enumType == CourseRegistrationsEnum.Error)
+            {
+                ViewBag.Message = "Bir hata oluştu!";
+            }
+            else if (enumType == CourseRegistrationsEnum.Null)
+            {
+                ViewBag.Message = "Api hata verdi.";
+            }
+            else
+            {
+                ViewBag.Message = "Bilinmeyen bir hata gerçekleşti.";
+            }
+            return View();
+        }
+
 
 
 
