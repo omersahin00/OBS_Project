@@ -12,7 +12,6 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/App.styles.css" asp-append-version="true" />
-
 </head>
 <body>
     <header>
@@ -35,6 +34,9 @@
                             <a style="display:@AuthorityManager.GetDisplayVariable(2)" class="nav-link text-dark" asp-area="" asp-controller="Student" asp-action="Index">Student-Index</a>
                         </li>
                         <li class="nav-item">
+                            <a style="display:@AuthorityManager.GetDisplayVariable(2)" class="nav-link text-dark" asp-area="" asp-controller="Employee" asp-action="EmployeeStudents">Employees-Student</a>
+                        </li>
+                        <li class="nav-item">
                             <a style="display:@AuthorityManager.GetDisplayVariable(2)" class="nav-link text-dark" asp-area="" asp-controller="Student" asp-action="Create">Student-Create</a>
                         </li>
                         <li class="nav-item">
@@ -51,6 +53,9 @@
                         </li>
                         <li class="nav-item">
                             <a style="display:@AuthorityManager.GetDisplayVariable(2)" class="nav-link text-dark" asp-area="" asp-controller="Employee" asp-action="Courses">Employee-Courses</a>
+                        </li>
+                        <li class="nav-item">
+                            <a style="display:@AuthorityManager.GetDisplayVariable(3)" class="nav-link text-dark" asp-area="" asp-controller="Employee" asp-action="Index">|Gizli|Employees</a>
                         </li>
                     </ul>
                 </div>

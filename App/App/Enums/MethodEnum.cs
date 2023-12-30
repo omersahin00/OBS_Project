@@ -26,6 +26,9 @@ namespace App.Enums
         [Description("AllStudentWithID")]
         AllStudentWithID,
 
+        [Description("AllStudentsWithEmployeeNumber")]
+        AllStudentsWithEmployeeNumber,
+
         [Description("CourseWithNumber")]
         CourseWithNumber,
 

@@ -45,7 +45,6 @@ namespace App.Controllers
                     ViewBag.ErrorMessage = "API ile iletişim kurulamadı!";
                     return View();
                 }
-
                 var model = JsonConvert.DeserializeObject<List<Student>>(result);
                 return View(model);
             }

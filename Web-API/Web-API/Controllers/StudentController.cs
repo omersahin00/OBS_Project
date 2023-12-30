@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Web_API.Concrete;
 using Web_API.Entities;
+using Web_API.Models;
 
 namespace Web_API.Controllers
 {
@@ -90,6 +91,45 @@ namespace Web_API.Controllers
             catch (Exception)
             {
                 return UnprocessableEntity();
+            }
+        }
+
+
+
+        [HttpGet("api/Student/Get/AllStudentsWithEmployeeNumber/{Number}")]
+        public ActionResult<IEnumerable<StudentsWithCourseID>> GetStudentsWithEmployeeNumber(string Number) // Employee numarası alındı.
+        {
+            // Bu model için belli bir model oluşturulacak. Bu modelde öğrencinin tüm bilgilerinin yanında aldığı dersin de ID'si bulunacak.
+            // Birden fazla dersi alan bir öğrenci varsa da o öğrencinin bilgisi gönderilen listede iki kere fakat farklı CourseID'lerine sahip bir şekilde gönderilecek.
+
+            List<EmployeeCourses> employeeCoursesList = _context.EmployeeCourses.Where(x => x.EmployeeNumber == Number).ToList();
+            if (employeeCoursesList != null)
+            {
+                List<StudentsWithCourseID> studentList = new List<StudentsWithCourseID>();
+
+                foreach (var item in employeeCoursesList)
+                {
+                    List<StudentActiveCourses> studentActiveCourses = _context.StudentActiveCourses.Where(x => x.CourseID == item.CourseID).ToList();
+                    foreach (var item2 in studentActiveCourses)
+                    {
+                        Student? student = _context.Students.FirstOrDefault(x => x.ID == item2.StudentID);
+                        if (student != null)
+                        {
+                            StudentsWithCourseID studentTemp = new StudentsWithCourseID(student);
+                            studentTemp.CourseID = item2.CourseID;
+                            studentList.Add(studentTemp);
+                            // model oluşturuldu ve model listeye eklendi.
+                        }
+                    }
+                }
+                // Liste düzenleniyor:
+                studentList = studentList.OrderBy(StudentsWithCourseID => StudentsWithCourseID.ID).ToList();
+                studentList = studentList.OrderBy(StudentsWithCourseID => StudentsWithCourseID.CourseID).ToList();
+                return Ok(studentList);
+            }
+            else
+            {
+                return NotFound();
             }
         }
 

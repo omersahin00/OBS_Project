@@ -24,10 +24,12 @@
     <None Remove="Entities\" />
     <None Remove="Concrete\" />
     <None Remove="Enums\" />
+    <None Remove="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Entities\" />
     <Folder Include="Concrete\" />
     <Folder Include="Enums\" />
+    <Folder Include="Models\" />
   </ItemGroup>
 </Project>
