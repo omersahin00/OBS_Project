@@ -61,7 +61,7 @@
                 </div>
                 @if (User.Identity != null && User.Identity.IsAuthenticated)
                 {
-                    <p>Hoş geldiniz, @User.FindFirst(ClaimTypes.Email)?.Value</p>
+                    <p>@User.FindFirst(ClaimTypes.Name)?.Value</p>
                 }
                 else
                 {

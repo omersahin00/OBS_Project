@@ -120,7 +120,6 @@ namespace App.Controllers
                 .AddEntities(EntitiesEnum.Account)
                 .AddRequest(RequestEnum.LoginEmployee)
                 .Build();
-
             string jsonProduct = JsonConvert.SerializeObject(employee);
             var result = await _requestFactory.SendHttpPostRequest(dockerApiUrl, jsonProduct);
             if (result == string.Empty)
@@ -135,6 +134,21 @@ namespace App.Controllers
             {
                 ViewBag.Message = "Giriş işlemi başarılı.";
 
+                dockerApiUrl = new ApiUrlBuilder(UrlTypeEnum.api)
+                    .AddEntities(EntitiesEnum.Employee)
+                    .AddRequest(RequestEnum.Get)
+                    .AddMethod(MethodEnum.WithNumber)
+                    .AddParameter(employee.UserNumber)
+                    .Build();
+                var result2 = await _requestFactory.SendHttpGetRequest(dockerApiUrl);
+                if (result2 == string.Empty)
+                {
+                    ViewBag.ErrorMessage = "API ile iletişim kurulamadı!1";
+                    return View();
+                }
+                List<Employee>? employee1 = JsonConvert.DeserializeObject<List<Employee>>(result2);
+
+
                 RoleEnum roleEnum;
 
                 if (employee.UserNumber == "1111")
@@ -145,14 +159,17 @@ namespace App.Controllers
                 var claims = new List<Claim>
                 {
                     new Claim(ClaimTypes.Email, employee.UserNumber),
+                    new Claim(ClaimTypes.Name, employee1?[0].FirstName + " " + employee1?[0].LastName),
                     new Claim(ClaimTypes.Role, roleEnum.ToString())
                 };
+                
                 var userIdentity = new ClaimsIdentity(claims, " ");
                 var authProporties = new AuthenticationProperties
                 {
                     IsPersistent = true,
                     ExpiresUtc = DateTimeOffset.UtcNow.AddMonths(1)
                 };
+
                 ClaimsPrincipal principal = new ClaimsPrincipal(userIdentity);
                 await HttpContext.SignInAsync(principal, authProporties);
                 return RedirectToAction("EmployeeLogin", "Account");
@@ -226,9 +243,25 @@ namespace App.Controllers
             if (loginReturnType == LoginReturnEnum.Accept)
             {
                 ViewBag.Message = "Giriş işlemi başarılı.";
+
+                dockerApiUrl = new ApiUrlBuilder(UrlTypeEnum.api)
+                    .AddEntities(EntitiesEnum.Student)
+                    .AddRequest(RequestEnum.Get)
+                    .AddMethod(MethodEnum.WithNumber)
+                    .AddParameter(student.Number)
+                    .Build();
+                var result2 = await _requestFactory.SendHttpGetRequest(dockerApiUrl);
+                if (result2 == string.Empty)
+                {
+                    ViewBag.ErrorMessage = "API ile iletişim kurulamadı!2";
+                    return View();
+                }
+                List<Student>? student1 = JsonConvert.DeserializeObject<List<Student>>(result2);
+
                 var claims = new List<Claim>
                 {
                     new Claim(ClaimTypes.Email, student.Number),
+                    new Claim(ClaimTypes.Name, student1?[0].FirstName + " " + student1?[0].LastName),
                     new Claim(ClaimTypes.Role, RoleEnum.Student.ToString())
                 };
                 var userIdentity = new ClaimsIdentity(claims, " ");

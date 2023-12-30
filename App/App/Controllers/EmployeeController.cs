@@ -1,16 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
+using System.Collections.Generic;
+using App.Enums;
+using App.Models;
 using App.Builders;
 using App.Managers;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using App.Enums;
 using App.Entities;
 using Newtonsoft.Json;
-using App.Models;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace App.Controllers
 {

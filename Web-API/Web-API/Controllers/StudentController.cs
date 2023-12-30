@@ -69,7 +69,7 @@ namespace Web_API.Controllers
 
 
 
-        [HttpGet("api/Student/Get/WithID/{Number}")]
+        [HttpGet("api/Student/Get/WithNumber/{Number}")]
         public ActionResult<IEnumerable<Student>> GetStudentWithNumber(string Number)
         {
             try
