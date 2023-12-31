@@ -16,10 +16,6 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = /Users/omersahin/Desktop/OBS_Project/App/App
 build_property._RazorSourceGeneratorDebug = 
 
-[/Users/omersahin/Desktop/OBS_Project/App/App/Views/Account/Create.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWNjb3VudC9DcmVhdGUuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
 [/Users/omersahin/Desktop/OBS_Project/App/App/Views/Account/EmployeeLogin.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWNjb3VudC9FbXBsb3llZUxvZ2luLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -34,6 +30,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [/Users/omersahin/Desktop/OBS_Project/App/App/Views/Employee/Courses.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRW1wbG95ZWUvQ291cnNlcy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/omersahin/Desktop/OBS_Project/App/App/Views/Employee/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRW1wbG95ZWUvQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [/Users/omersahin/Desktop/OBS_Project/App/App/Views/Employee/EmployeeStudents.cshtml]

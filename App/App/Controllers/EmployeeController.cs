@@ -68,7 +68,7 @@ namespace App.Controllers
 
         [Authorize(Roles = "Admin, Employee")]
         [HttpGet]
-        public async Task<IActionResult> EmployeeStudents()
+        public async Task<IActionResult> EmployeeStudents(string? Number)
         {
             if (_requestFactory == null)
             {
@@ -76,11 +76,14 @@ namespace App.Controllers
                 return View();
             }
 
-            string? Number = User.FindFirst(ClaimTypes.Email)?.Value;
             if (Number == null)
             {
-                ViewBag.ErrorMessage = "Oturum Açılmamış!";
-                return View();
+                Number = User.FindFirst(ClaimTypes.Email)?.Value;
+                if (Number == null)
+                {
+                    ViewBag.ErrorMessage = "Oturum Açılmamış!";
+                    return View();
+                }
             }
 
 
@@ -175,6 +178,79 @@ namespace App.Controllers
         }
 
 
+
+
+
+
+
+
+        [Authorize(Roles = "Admin")]
+        [HttpGet]
+        public IActionResult Create()
+        {
+            string? NewAccountNumber = TempData["NewAccountNumber"] as string;
+            if (NewAccountNumber != null) ViewBag.NewAccountNumber = NewAccountNumber;
+            return View();
+        }
+
+
+        [Authorize(Roles = "Admin")]
+        [HttpPost]
+        public async Task<IActionResult> Create(Employee employee)
+        {
+            if (_requestFactory == null)
+            {
+                ViewBag.ErrorMessage = "Talep oluşturulamadı!";
+                return View();
+            }
+
+            if (ModelState.IsValid && employee != null)
+            {
+                string dockerApiUrl = new ApiUrlBuilder(UrlTypeEnum.api)
+                    .AddEntities(EntitiesEnum.Employee)
+                    .AddRequest(RequestEnum.Post)
+                    .AddMethod(MethodEnum.Create)
+                    .Build();
+
+                string jsonProduct = JsonConvert.SerializeObject(employee);
+                var result = await _requestFactory.SendHttpPostRequest(dockerApiUrl, jsonProduct);
+                if (result == string.Empty)
+                {
+                    ViewBag.ErrorMessage = "API ile iletişim kurulamadı!";
+                    return View();
+                }
+                CreateReturnEnum? createReturnEnum = JsonConvert.DeserializeObject<CreateReturnEnum>(result);
+
+                if (createReturnEnum == null)
+                {
+                    ViewBag.ErrorMessage = "Api cevap vermedi.";
+                    return View();
+                }
+
+                if (createReturnEnum == CreateReturnEnum.Accept)
+                {
+                    ViewBag.Message = "İşlem başarılı.";
+                }
+                else if (createReturnEnum == CreateReturnEnum.Conflict)
+                {
+                    ViewBag.ErrorMessage = "Böyle bir kullanıcı zaten mevcut.";
+                }
+                else if (createReturnEnum == CreateReturnEnum.Null)
+                {
+                    ViewBag.ErrorMessage = "İşlem gerçekleştirilemedi!";
+                }
+                else
+                {
+                    ViewBag.ErrorMessage = "Bilinmeyen bir hata oluştu.";
+                }
+                return View();
+            }
+            else
+            {
+                ViewBag.ErrorMessage = "Form doğru formatta değil!";
+                return View();
+            }
+        }
     }
 }
 

@@ -34,7 +34,7 @@
                         <td>@employee.Password</td>
                         <td>@employee.IsActive</td>
                         <td>
-                            <form method="post" asp-action="Index" asp-controller="Notes">
+                            <form method="get" asp-action="EmployeeStudents" asp-controller="Employee">
                                 <button type="submit" name="Number" value="@employee.UserNumber">Öğrencileri</button>
                             </form>
                         </td>

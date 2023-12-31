@@ -236,9 +236,25 @@ namespace App.Controllers
                         .AddMethod(MethodEnum.Create)
                         .Build();
                     string jsonProduct = JsonConvert.SerializeObject(student);
-                    await _requestFactory.SendHttpPostRequest(dockerApiUrl, jsonProduct);
+                    var result = await _requestFactory.SendHttpPostRequest(dockerApiUrl, jsonProduct);
+                    CreateReturnEnum createReturnEnum = JsonConvert.DeserializeObject<CreateReturnEnum>(result);
 
-                    ViewBag.Message = "İşlem başarılı.";
+                    if (createReturnEnum == CreateReturnEnum.Accept)
+                    {
+                        ViewBag.Message = "İşlem başarılı.";
+                    }
+                    else if (createReturnEnum == CreateReturnEnum.Conflict)
+                    {
+                        ViewBag.ErrorMessage = "Böyle bir kullanıcı zaten mevcut.";
+                    }
+                    else if (createReturnEnum == CreateReturnEnum.Null)
+                    {
+                        ViewBag.ErrorMessage = "İşlem gerçekleştirilemedi!";
+                    }
+                    else
+                    {
+                        ViewBag.ErrorMessage = "Bilinmeyen bir hata oluştu.";
+                    }
                     return View();
                 }
                 catch (Exception ex)

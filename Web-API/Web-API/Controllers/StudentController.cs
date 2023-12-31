@@ -183,7 +183,7 @@ namespace Web_API.Controllers
 
 
         [HttpPost("api/Student/Post/Create")]
-        public ActionResult<Student> CreateStudent(Student student)
+        public ActionResult<CreateReturnEnum> CreateStudent(Student student)
         {
             try
             {
@@ -192,24 +192,24 @@ namespace Web_API.Controllers
                     Student? studentData = _context.Students.FirstOrDefault(x => x.Number == student.Number);
                     if (studentData != null)
                     {
-                        return Ok();
+                        return Ok(CreateReturnEnum.Conflict);
                     }
                     else
                     {
                         student.IsActive = true;
                         _context.Students.Add(student);
                         _context.SaveChanges();
-                        return Ok(student);
+                        return Ok(CreateReturnEnum.Accept);
                     }
                 }
                 else
                 {
-                    return UnprocessableEntity();
+                    return Ok(CreateReturnEnum.Decline);
                 }
             }
             catch (Exception)
             {
-                return UnprocessableEntity();
+                return Ok(CreateReturnEnum.Null);
             }
         }
 

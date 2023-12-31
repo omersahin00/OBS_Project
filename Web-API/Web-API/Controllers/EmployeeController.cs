@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Web_API.Concrete;
 using Web_API.Entities;
+using Web_API.Enums;
 
 namespace Web_API.Controllers
 {
@@ -97,7 +98,7 @@ namespace Web_API.Controllers
 
 
         [HttpPost("api/Employee/Post/Create")]
-        public ActionResult<Employee> CreateEmployee(Employee employee)
+        public ActionResult<CreateReturnEnum> CreateEmployee(Employee employee)
         {
             try
             {
@@ -106,24 +107,24 @@ namespace Web_API.Controllers
                     Employee? employeeData = _context.Employees.FirstOrDefault(x => x.UserNumber == employee.UserNumber);
                     if (employeeData != null)
                     {
-                        return Ok();
+                        return Ok(CreateReturnEnum.Conflict);
                     }
                     else
                     {
                         employee.IsActive = true;
                         _context.Employees.Add(employee);
                         _context.SaveChanges();
-                        return Ok(employee);
+                        return Ok(CreateReturnEnum.Accept);
                     }
                 }
                 else
                 {
-                    return UnprocessableEntity();
+                    return Ok(CreateReturnEnum.Decline);
                 }
             }
             catch (Exception)
             {
-                return UnprocessableEntity();
+                return Ok(CreateReturnEnum.Null);
             }
         }
 

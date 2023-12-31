@@ -74,9 +74,12 @@ namespace App.Controllers
                 }
                 else if (accountType == AccountTypeEnum.Null)
                 {
-                    TempData["ErrorMessage"] = "Böyle bir kullanıcı mevcut değil. Oluşturun:";
+                    // Buraya yetki olmadan da girilebiliyor.
+                    // Güvenlik açığı var. Buraya sadece Admin girebilmeli:
+                    TempData["ErrorMessage"] = "Böyle bir kullanıcı mevcut değil.";
                     TempData["NewAccountNumber"] = Number;
-                    return RedirectToAction("Create", "Account");
+                    //return RedirectToAction("Create", "Employee");
+                    return View();
                 }
                 else
                 {
@@ -300,62 +303,6 @@ namespace App.Controllers
         }
 
 
-
-        [Authorize(Roles = "Admin")]
-        [HttpGet]
-        public IActionResult Create()
-        {
-            string? NewAccountNumber = TempData["NewAccountNumber"] as string;
-            if (NewAccountNumber != null) ViewBag.NewAccountNumber = NewAccountNumber;
-            return View();
-        }
-
-
-        [Authorize(Roles = "Admin")]
-        [HttpPost]
-        public async Task<IActionResult> Create(Employee employee)
-        {
-            if (_requestFactory == null)
-            {
-                ViewBag.ErrorMessage = "Talep oluşturulamadı!";
-                return View();
-            }
-
-            if (ModelState.IsValid && employee != null)
-            {
-                string dockerApiUrl = new ApiUrlBuilder(UrlTypeEnum.api)
-                    .AddEntities(EntitiesEnum.Employee)
-                    .AddRequest(RequestEnum.Post)
-                    .AddMethod(MethodEnum.Create)
-                    .Build();
-
-                string jsonProduct = JsonConvert.SerializeObject(employee);
-                var result = await _requestFactory.SendHttpPostRequest(dockerApiUrl, jsonProduct);
-                if (result == string.Empty)
-                {
-                    ViewBag.ErrorMessage = "API ile iletişim kurulamadı!";
-                    return View();
-                }
-
-                Employee? employeeData = JsonConvert.DeserializeObject<Employee>(result);
-
-                if (employeeData != null)
-                {
-                    ViewBag.Message = "İşlem başarılı";
-                    return View();
-                }
-                else
-                {
-                    ViewBag.ErrorMessage = "Böyle bir kullanıcı mevcut!";
-                    return View();
-                }
-            }
-            else
-            {
-                ViewBag.ErrorMessage = "Form doğru formatta değil!";
-                return View();
-            }
-        }
 
 
         [Authorize]
