@@ -17,6 +17,9 @@ namespace App.Enums
         [Description("Update")]
         Update,
 
+        [Description("UpdateList")]
+        UpdateList,
+
         [Description("All")]
         All,
 

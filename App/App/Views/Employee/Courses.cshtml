@@ -55,6 +55,11 @@
                                     <button type="submit" name="CourseID" value="@item.ID">Öğrencileri Görüntüle</button>
                                 </form>
                             </td>
+                            <td>
+                                <form method="get" asp-action="NoteUpdate" asp-controller="Notes">
+                                    <button type="submit" name="CourseID" value="@item.ID">Notları Güncelle</button>
+                                </form>
+                            </td>
                         </tr>
                     }
                 </tbody>

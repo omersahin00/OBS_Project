@@ -30,7 +30,7 @@ namespace App.Controllers
         public async Task<IActionResult> Index()
         {
             string? Number = User.FindFirst(ClaimTypes.Email)?.Value;
-            if (Number != null) return await GetViewPage(Number);
+            if (Number != null) return await GetIndexViewPage(Number);
             else return View();
         }
 
@@ -40,14 +40,14 @@ namespace App.Controllers
         [HttpPost]
         public async Task<IActionResult> Index(string Number)
         {
-            if (Number != null) return await GetViewPage(Number);
+            if (Number != null) return await GetIndexViewPage(Number);
             else return View();
         }
 
 
 
         // Bu bir fonksiyon:
-        public async Task<IActionResult> GetViewPage(string Number)
+        public async Task<IActionResult> GetIndexViewPage(string Number)
         {
             if (_requestFactory == null)
             {
@@ -114,6 +114,137 @@ namespace App.Controllers
                 return View();
             }
         }
+
+
+
+
+        [Authorize(Roles = "Admin, Employee")]
+        [HttpGet]
+        public async Task<IActionResult> NoteUpdate(string CourseID)
+        {
+            if (CourseID == null)
+            {
+                ViewBag.ErrorMessage = "Bir sorun oluştu!";
+                return View();
+            }
+
+            int _CourseID = int.Parse(CourseID);
+
+            // Öğrenci Listesi Çekiliyor:
+            string dockerApiUrl = new ApiUrlBuilder(UrlTypeEnum.api)
+                   .AddEntities(EntitiesEnum.Course)
+                   .AddRequest(RequestEnum.Get)
+                   .AddMethod(MethodEnum.AllStudentWithID)
+                   .AddParameter(CourseID)
+                   .Build();
+            var result1 = await _requestFactory.SendHttpGetRequest(dockerApiUrl);
+            if (result1 == string.Empty)
+            {
+                ViewBag.ErrorMessage = "API ile iletişim kurulamadı!";
+                return View();
+            }
+            List<Student>? studentList = JsonConvert.DeserializeObject<List<Student>>(result1);
+
+            if (studentList == null)
+            {
+                ViewBag.ErrorMessage = "Öğrenci listesi alınamadı.";
+                return View();
+            }
+
+            List<NoteUpdateModel> noteModelList = new List<NoteUpdateModel>();
+
+            // Notlar Listesi Çekiliyor:
+            foreach (var student in studentList)
+            {
+                if (student.Number == null) continue;
+                dockerApiUrl = new ApiUrlBuilder(UrlTypeEnum.api)
+                    .AddEntities(EntitiesEnum.Notes)
+                    .AddRequest(RequestEnum.Get)
+                    .AddMethod(MethodEnum.AllWithNumber)
+                    .AddParameter(student.Number)
+                    .Build();
+                var result2 = await _requestFactory.SendHttpGetRequest(dockerApiUrl);
+                if (result2 == string.Empty)
+                {
+                    ViewBag.ErrorMessage = "API ile iletişim kurulamadı!";
+                    return View();
+                }
+                List<Notes>? noteList = JsonConvert.DeserializeObject<List<Notes>>(result2);
+
+                Notes? studentNote = noteList?.FirstOrDefault(x => x.CourseID == _CourseID);
+                if (studentNote != null)
+                {
+                    NoteUpdateModel noteUpdateModel = new NoteUpdateModel();
+                    noteUpdateModel.NoteID = studentNote.ID;
+                    noteUpdateModel.StudentNumber = student.Number;
+                    noteUpdateModel.FirstName = student.FirstName;
+                    noteUpdateModel.LastName = student.LastName;
+                    noteUpdateModel.Score = studentNote.Score;
+                    noteUpdateModel.LetterScore = studentNote.LetterScore;
+                    noteModelList.Add(noteUpdateModel);
+                }
+            }
+
+            ViewBag.Message = JsonConvert.SerializeObject(noteModelList);
+            return View(noteModelList);
+        }
+
+
+
+
+        [Authorize(Roles = "Admin, Employee")]
+        [HttpPost]
+        public async Task<IActionResult> NoteUpdate(List<NoteUpdateModel> noteList)
+        {
+            if (noteList == null)
+            {
+                ViewBag.ErrorMessage = "Bir sorun oluştu.";
+                return View();
+            }
+
+            string metin = "";
+
+            List<Notes> newNoteList = new List<Notes>();
+            foreach (var studentNote in noteList)
+            {
+                Notes note = new Notes();
+                note.ID = studentNote.NoteID;
+                note.Score = studentNote.Score;
+                note.LetterScore = LetterScoreManager.LetterScoreCalculator(studentNote.Score);
+
+                metin += note.Score + " " + note.LetterScore + " - ";
+
+                note.IsActive = true;
+                newNoteList.Add(note);
+            }
+
+            string dockerApiUrl = new ApiUrlBuilder(UrlTypeEnum.api)
+                .AddEntities(EntitiesEnum.Notes)
+                .AddRequest(RequestEnum.Post)
+                .AddMethod(MethodEnum.UpdateList)
+                .Build();
+            string jsonProduct = JsonConvert.SerializeObject(newNoteList);
+            var result = await _requestFactory.SendHttpPostRequest(dockerApiUrl, jsonProduct);
+            if (result == string.Empty)
+            {
+                ViewBag.ErrorMessage = "API ile iletişim kurulamadı!";
+                return View();
+            }
+            UpdateReturnEnum? updateReturnEnum = JsonConvert.DeserializeObject<UpdateReturnEnum>(result);
+            if (updateReturnEnum != UpdateReturnEnum.Accept)
+            {
+                ViewBag.ErrorMessage = "Bir hata oluştu." + " " + updateReturnEnum;
+                ViewBag.Message = jsonProduct;
+                TempData["ErrorMessage"] = metin;
+                return View();
+            }
+
+            ViewBag.Message = "İşlem tamamlandı.";
+            ViewBag.ErrorMessage = metin;
+            return View();
+        }
+
+
     }
 }
 

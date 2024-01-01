@@ -105,7 +105,8 @@ namespace Web_API.Controllers
                 if (ModelState.IsValid)
                 {
                     Employee? employeeData = _context.Employees.FirstOrDefault(x => x.UserNumber == employee.UserNumber);
-                    if (employeeData != null)
+                    Student? studentData = _context.Students.FirstOrDefault(x => x.Number == employee.UserNumber);
+                    if (employeeData != null || studentData != null)
                     {
                         return Ok(CreateReturnEnum.Conflict);
                     }

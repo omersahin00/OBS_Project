@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Web_API.Concrete;
 using Web_API.Entities;
+using Web_API.Enums;
 
 namespace Web_API.Controllers
 {
@@ -111,6 +112,7 @@ namespace Web_API.Controllers
         [HttpPost("api/Notes/Post/Update")]
         public ActionResult<Notes> UpdateNote(Notes note)
         {
+            // Tek bir not güncelliyor:
             try
             {
                 if (ModelState.IsValid && _context.Notes != null)
@@ -124,32 +126,80 @@ namespace Web_API.Controllers
                         noteData = _context.Notes.FirstOrDefault(x => x.StudentNotesID == note.StudentNotesID && x.CourseID == note.CourseID);
 
                     else
-                        return UnprocessableEntity();
+                        return Ok(UpdateReturnEnum.MissingData);
 
                     if (noteData != null)
                     {
                         noteData.Score = note.Score;
                         noteData.LetterScore = note.LetterScore;
-                        noteData.IsActive = note.IsActive;
                         _context.Notes.Update(noteData);
                         _context.SaveChanges();
-                        return NoContent();
+                        return Ok(UpdateReturnEnum.Accept);
                     }
                     else
                     {
-                        return NotFound();
+                        return Ok(UpdateReturnEnum.NotFound);
                     }
                 }
                 else
                 {
-                    return UnprocessableEntity();
+                    return Ok(UpdateReturnEnum.Null);
                 }
             }
             catch (Exception)
             {
-                return UnprocessableEntity();
+                return Ok(UpdateReturnEnum.Null);
             }
         }
+
+
+
+
+        [HttpPost("api/Notes/Post/UpdateList")]
+        public ActionResult<Notes> UpdateNotes(List<Notes> noteList)
+        {            
+            try
+            {
+                if (ModelState.IsValid && _context.Notes != null)
+                {
+                    foreach (var note in noteList)
+                    {
+                        Notes? noteData;
+
+                        if (note.ID != 0)
+                            noteData = _context.Notes.FirstOrDefault(x => x.ID == note.ID);
+
+                        else if (note.StudentNotesID != 0)
+                            noteData = _context.Notes.FirstOrDefault(x => x.StudentNotesID == note.StudentNotesID && x.CourseID == note.CourseID);
+
+                        else
+                            return Ok(UpdateReturnEnum.MissingData);
+
+                        if (noteData != null)
+                        {
+                            noteData.Score = note.Score;
+                            noteData.LetterScore = note.LetterScore;
+                            _context.Notes.Update(noteData);                            
+                        }
+                        else
+                        {
+                            return Ok(UpdateReturnEnum.NotFound);
+                        }
+                    }
+                    _context.SaveChanges();
+                    return Ok(UpdateReturnEnum.Accept);
+                }
+                else
+                {
+                    return Ok(UpdateReturnEnum.Null);
+                }
+            }
+            catch (Exception)
+            {
+                return Ok(UpdateReturnEnum.Null);
+            }
+        }
+
 
     }
 }

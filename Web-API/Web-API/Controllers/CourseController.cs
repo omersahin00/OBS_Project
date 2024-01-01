@@ -99,9 +99,10 @@ namespace Web_API.Controllers
 
 
         [HttpGet("api/Course/Get/AllStudentWithID/{CourseID}")]
-        public ActionResult<IEnumerable<Student>> GetCourseStudents(int CourseID)
+        public ActionResult<IEnumerable<Student>> GetCourseStudents(string CourseID)
         {
-            List<StudentActiveCourses> studentCoursesList = _context.StudentActiveCourses.Where(x => x.CourseID == CourseID).ToList();
+            int _CourseID = int.Parse(CourseID);
+            List<StudentActiveCourses> studentCoursesList = _context.StudentActiveCourses.Where(x => x.CourseID == _CourseID).ToList();
             
             if (studentCoursesList != null)
             {
