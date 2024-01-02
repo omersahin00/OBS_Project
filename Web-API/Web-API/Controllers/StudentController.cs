@@ -197,6 +197,7 @@ namespace Web_API.Controllers
                     }
                     else
                     {
+                        student.StudentNotesID = student.ID;
                         student.IsActive = true;
                         _context.Students.Add(student);
                         _context.SaveChanges();
