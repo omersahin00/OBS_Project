@@ -12,6 +12,8 @@ namespace Web_API.Entities
 
         public int Credit { get; set; }
 
+        public bool IsUsed { get; set; }
+
         public bool IsActive { get; set; }
     }
 }

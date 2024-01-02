@@ -132,6 +132,7 @@ namespace Web_API.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    course.IsUsed = false;
                     course.IsActive = true;
                     _context.Courses.Add(course);
                     _context.SaveChanges();

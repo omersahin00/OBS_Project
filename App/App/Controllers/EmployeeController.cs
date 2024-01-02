@@ -11,6 +11,8 @@ using Newtonsoft.Json;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace App.Controllers
 {
@@ -178,6 +180,128 @@ namespace App.Controllers
         }
 
 
+
+        // Öğretmen ders açma paneli:
+        [Authorize(Roles = "Admin, Employee")]
+        [HttpGet]
+        public async Task<IActionResult> CourseOpening()
+        {
+            string? Number = User.FindFirst(ClaimTypes.Email)?.Value;
+            if (Number == null)
+            {
+                ViewBag.ErrorMessage = "Oturum ile iligli bir sorun oluştu! Çıkış yapıp tekrar giriş yapın.";
+                return View();
+            }
+
+            // Öğretmenin veridiği tüm dersler çekiliyor:
+            string dockerApiUrl = new ApiUrlBuilder(UrlTypeEnum.api)
+                .AddEntities(EntitiesEnum.EmployeeCourses)
+                .AddRequest(RequestEnum.Get)
+                .AddMethod(MethodEnum.WithNumber)
+                .AddParameter(Number)
+                .Build();
+            var result1 = await _requestFactory.SendHttpGetRequest(dockerApiUrl);
+            if (result1 == string.Empty)
+            {
+                ViewBag.ErrorMessage = "API ile iletişim kurulamadı!";
+                return View();
+            }
+            List<Course>? employeeCourseList = JsonConvert.DeserializeObject<List<Course>>(result1);
+            if (employeeCourseList == null)
+            {
+                ViewBag.ErrorMessage = "Bir sorun oluştu.";
+                return View();
+            }
+
+            // Veri tabanına kayıtlı tüm dersler çekiliyor:
+            dockerApiUrl = new ApiUrlBuilder(UrlTypeEnum.api)
+                .AddEntities(EntitiesEnum.Course)
+                .AddRequest(RequestEnum.Get)
+                .AddMethod(MethodEnum.All)
+                .Build();
+            var result2 = await _requestFactory.SendHttpGetRequest(dockerApiUrl);
+            if (result2 == string.Empty)
+            {
+                ViewBag.ErrorMessage = "API ile iletişim kurulamadı!";
+                return View();
+            }
+            List<Course>? allCourseList = JsonConvert.DeserializeObject<List<Course>>(result2);
+            if (allCourseList == null)
+            {
+                ViewBag.ErrorMessage = "Bir sorun oluştu.";
+                return View();
+            }
+
+            for (int i = allCourseList.Count - 1; i >= 0; i--)
+            {
+                Course? course = employeeCourseList.FirstOrDefault(x => x.ID == allCourseList[i].ID);
+                if (course != null || allCourseList[i].IsUsed)
+                {
+                    allCourseList.Remove(allCourseList[i]);
+                }
+            }
+
+            return View(allCourseList);
+        }
+
+
+
+        [Authorize(Roles = "Admin, Employee")]
+        [HttpPost]
+        public async Task<IActionResult> CourseOpening(List<int> CourseIDList)
+        {
+            if (CourseIDList == null)
+            {
+                ViewBag.ErrorMessage = "Bir hata oluştu.";
+                return View();
+            }
+
+            string? Number = User.FindFirst(ClaimTypes.Email)?.Value;
+            if (Number == null)
+            {
+                ViewBag.ErrorMessage = "Oturum ile iligli bir sorun oluştu! Çıkış yapıp tekrar giriş yapın.";
+                return View();
+            }
+
+            string dockerApiUrl = new ApiUrlBuilder(UrlTypeEnum.api)
+                .AddEntities(EntitiesEnum.EmployeeCourses)
+                .AddRequest(RequestEnum.Post)
+                .AddMethod(MethodEnum.CreateWithNumber)
+                .AddParameter(Number)
+                .Build();
+            string jsonProduct = JsonConvert.SerializeObject(CourseIDList);
+            var result = await _requestFactory.SendHttpPostRequest(dockerApiUrl, jsonProduct);
+            if (result == string.Empty)
+            {
+                ViewBag.ErrorMessage = "API ile iletişim kurulamadı!";
+                return View();
+            }
+            CreateReturnEnum? createReturnEnum = JsonConvert.DeserializeObject<CreateReturnEnum>(result);
+
+            if (createReturnEnum == null)
+            {
+                ViewBag.ErrorMessage = "Api cevap vermedi.";
+                return View();
+            }
+
+            if (createReturnEnum == CreateReturnEnum.Accept)
+            {
+                ViewBag.Message = "İşlem başarılı.";
+            }
+            else if (createReturnEnum == CreateReturnEnum.Decline)
+            {
+                ViewBag.ErrorMessage = "Talep reddedildi!";
+            }
+            else if (createReturnEnum == CreateReturnEnum.Null)
+            {
+                ViewBag.ErrorMessage = "İşlem gerçekleştirilemedi!";
+            }
+            else
+            {
+                ViewBag.ErrorMessage = "Bilinmeyen bir hata oluştu.";
+            }
+            return View();
+        }
 
 
 

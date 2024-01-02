@@ -105,6 +105,7 @@ namespace App.Controllers
                 return View();
             }
 
+            // Veri tabanındaki tüm dersler çekiliyor:
             string dockerApiUrl = new ApiUrlBuilder(UrlTypeEnum.api)
                 .AddEntities(EntitiesEnum.Course)
                 .AddRequest(RequestEnum.Get)
@@ -144,7 +145,7 @@ namespace App.Controllers
             {
                 var course = model1[i];
                 Course? studentActiveCourses = model2.FirstOrDefault(x => x.ID == course.ID);
-                if (studentActiveCourses != null)
+                if (studentActiveCourses != null || !course.IsUsed)
                 {
                     model1.Remove(course);
                 }

@@ -14,6 +14,9 @@ namespace App.Enums
         [Description("Create")]
         Create,
 
+        [Description("CreateWithNumber")]
+        CreateWithNumber,
+
         [Description("Update")]
         Update,
 
