@@ -1,0 +1,68 @@
+﻿@model List<App.Entities.Course>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Create Form</title>
+    <link rel="stylesheet" href="~/css/student-create.css" asp-append-version="true" />
+</head>
+<body>
+    @if (ViewBag.Message != null)
+    {
+        <p style="color:green"> @ViewBag.Message </p>
+    }
+    @if (ViewBag.ErrorMessage != null)
+    {
+        <p style="color:red"> @ViewBag.ErrorMessage </p>
+    }
+    @if (TempData["Message"] != null)
+    {
+        <p style="color:red"> @TempData["Message"] </p>
+    }
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <p style="color:red"> @TempData["ErrorMessage"] </p>
+    }
+    <div class="container2">
+        <h2>Ders Oluştur</h2>
+        <form asp-action="Create" method="post">
+            <label for="Name">Ders Adı:</label>
+            <input type="text" id="Name" name="Name" required>
+
+            <label for="Credit">Kredisi:</label>
+            <input type="number" id="Credit" name="Credit" required>
+
+            <button type="submit" asp-action="Create">Ders Oluştur</button>
+        </form>
+    </div>
+    <div class="container2">
+        @if (Model != null)
+        {
+            <h2>Kayıtlı Dersler</h2>
+            <div class="container1">
+                <table class="notlar-table1">
+                    <thead>
+                        <tr>
+                            <th class="parameters">Ders Adı</th>
+                            <th class="parameters">Kredisi</th>
+                            <th class="parameters">Aktiflik</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.Name</td>
+                                <td>@item.Credit</td>
+                                <td>@item.IsActive</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+    </div>
+</body>
+
+

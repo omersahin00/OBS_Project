@@ -1,10 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using Web_API.Enums;
 using Web_API.Concrete;
 using Web_API.Entities;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Web_API.Controllers
 {
@@ -136,16 +137,16 @@ namespace Web_API.Controllers
                     course.IsActive = true;
                     _context.Courses.Add(course);
                     _context.SaveChanges();
-                    return Ok();
+                    return Ok(CreateReturnEnum.Accept);
                 }
                 else
                 {
-                    return UnprocessableEntity();
+                    return Ok(CreateReturnEnum.Decline);
                 }
             }
             catch (Exception)
             {
-                return UnprocessableEntity();
+                return Ok(CreateReturnEnum.Null);
             }
         }
 

@@ -2,15 +2,15 @@
 using System.Linq;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using App.Enums;
+using App.Models;
 using App.Entities;
 using App.Managers;
-using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
 using App.Builders;
-using App.Enums;
-using Microsoft.AspNetCore.Authorization;
+using Newtonsoft.Json;
 using System.Security.Claims;
-using App.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace App.Controllers
 {

@@ -197,9 +197,14 @@ namespace Web_API.Controllers
                     }
                     else
                     {
-                        student.StudentNotesID = student.ID;
                         student.IsActive = true;
                         _context.Students.Add(student);
+                        _context.SaveChanges();
+
+                        Student? newStudentData = _context.Students.FirstOrDefault(x => x.ID == student.ID);
+                        if (newStudentData == null) return Ok(CreateReturnEnum.Null);
+                        newStudentData.StudentNotesID = newStudentData.ID;
+                        _context.Students.Update(newStudentData);
                         _context.SaveChanges();
                         return Ok(CreateReturnEnum.Accept);
                     }

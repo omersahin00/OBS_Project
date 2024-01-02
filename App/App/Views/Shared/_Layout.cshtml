@@ -63,6 +63,9 @@
                         <li class="nav-item">
                             <a style="display:@AuthorityManager.GetDisplayVariable(2)" class="nav-link text-dark" asp-area="" asp-controller="Employee" asp-action="CourseOpening">Employee-CourseOpening</a>
                         </li>
+                        <li class="nav-item">
+                            <a style="display:@AuthorityManager.GetDisplayVariable(3)" class="nav-link text-dark" asp-area="" asp-controller="Course" asp-action="Create">Course-Create</a>
+                        </li>
                     </ul>
                 </div>
                 @if (User.Identity != null && User.Identity.IsAuthenticated)
