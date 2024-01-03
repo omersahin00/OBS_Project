@@ -15,6 +15,7 @@ namespace App.Managers
         }
 
 
+        /*
         public string GetDisplayVariable(int AuthorityLavel)
 		{
             ClaimsPrincipal? currentUser = _httpContextAccessor.HttpContext?.User;
@@ -32,6 +33,68 @@ namespace App.Managers
             else
                 return "none";
         }
+        */
+
+
+        public string GetDisplayVariable(RoleEnum roleEnum1)
+        {
+            ClaimsPrincipal? currentUser = _httpContextAccessor.HttpContext?.User;
+            string? claimRole = currentUser?.FindFirst(ClaimTypes.Role)?.Value;
+            RoleEnum roleEnum;
+
+            if (currentUser == null || claimRole == null)
+                roleEnum = RoleEnum.Default;
+            else
+                roleEnum = GetRoleEnum(claimRole);
+
+            if (roleEnum == roleEnum1)
+                return "block";
+            else
+                return "none";
+        }
+
+
+
+
+        public string GetDisplayVariable(RoleEnum roleEnum1, RoleEnum roleEnum2)
+        {
+            ClaimsPrincipal? currentUser = _httpContextAccessor.HttpContext?.User;
+            string? claimRole = currentUser?.FindFirst(ClaimTypes.Role)?.Value;
+            RoleEnum roleEnum;
+
+            if (currentUser == null || claimRole == null)
+                roleEnum = RoleEnum.Default;
+            else
+                roleEnum = GetRoleEnum(claimRole);
+
+
+            if (roleEnum == roleEnum1 || roleEnum == roleEnum2)
+                return "block";
+            else
+                return "none";
+        }
+
+
+
+
+        public string GetDisplayVariable(RoleEnum roleEnum1, RoleEnum roleEnum2, RoleEnum roleEnum3)
+        {
+            ClaimsPrincipal? currentUser = _httpContextAccessor.HttpContext?.User;
+            string? claimRole = currentUser?.FindFirst(ClaimTypes.Role)?.Value;
+            RoleEnum roleEnum;
+
+            if (currentUser == null || claimRole == null)
+                roleEnum = RoleEnum.Default;
+            else
+                roleEnum = GetRoleEnum(claimRole);
+
+
+            if (roleEnum == roleEnum1 || roleEnum == roleEnum2 || roleEnum == roleEnum3)
+                return "block";
+            else
+                return "none";
+        }
+
 
 
         public RoleEnum GetRoleEnum(string claimRole)

@@ -1,6 +1,7 @@
 ﻿@model List<App.Models.StudentNotesModel>
 @inject HtmlAuthorityManager AuthorityManager
 @using App.Managers
+@using App.Enums
 
 
 <!DOCTYPE html>
@@ -32,7 +33,7 @@
         <p style="color:red"> @TempData["ErrorMessage"] </p>
     }
 
-    <div style="display:@AuthorityManager.GetDisplayVariable(2)" class="container1">
+    <div style="display:@AuthorityManager.GetDisplayVariable(RoleEnum.Admin)" class="container1">
         @* Öğrencinin numarası alınacak: *@
         <form asp-action="Index" asp-controller="Notes" method="post">
             <p>

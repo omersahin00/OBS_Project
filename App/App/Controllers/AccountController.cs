@@ -159,10 +159,14 @@ namespace App.Controllers
                 else
                     roleEnum = RoleEnum.Employee;
 
+                string? employeeFirstName = employee1?[0].FirstName;
+                string? employeeLastName = employee1?[0].LastName;
+                if (employee1?[0].UserNumber == "1111") employeeLastName += " " + "(ADMIN)";
                 var claims = new List<Claim>
                 {
                     new Claim(ClaimTypes.Email, employee.UserNumber),
-                    new Claim(ClaimTypes.Name, employee1?[0].FirstName + " " + employee1?[0].LastName),
+                    //new Claim(ClaimTypes.Name, employee1?[0].FirstName + " " + employee1?[0].LastName),
+                    new Claim(ClaimTypes.Name, employeeFirstName + " " + employeeLastName),
                     new Claim(ClaimTypes.Role, roleEnum.ToString())
                 };
                 

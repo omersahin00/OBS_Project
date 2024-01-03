@@ -1,5 +1,6 @@
 ﻿@using System.Security.Claims
 @using App.Managers
+@using App.Enums
 @inject HtmlAuthorityManager AuthorityManager
 
 
@@ -25,40 +26,37 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a style="display:@AuthorityManager.GetDisplayVariable(2)" class="nav-link text-dark" asp-area="" asp-controller="Student" asp-action="Index">Tüm Öğrenciler</a>
+                            <a style="display:@AuthorityManager.GetDisplayVariable(RoleEnum.Employee, RoleEnum.Admin)" class="nav-link text-dark" asp-area="" asp-controller="Student" asp-action="Index">Tüm Öğrenciler</a>
                         </li>
                         <li class="nav-item">
-                            <a style="display:@AuthorityManager.GetDisplayVariable(2)" class="nav-link text-dark" asp-area="" asp-controller="Employee" asp-action="EmployeeStudents">Öğrencileriniz</a>
+                            <a style="display:@AuthorityManager.GetDisplayVariable(RoleEnum.Admin)" class="nav-link text-dark" asp-area="" asp-controller="Employee" asp-action="Index">Tüm Personeller</a>
                         </li>
                         <li class="nav-item">
-                            <a style="display:@AuthorityManager.GetDisplayVariable(2)" class="nav-link text-dark" asp-area="" asp-controller="Student" asp-action="Create">Öğrenci Hesabı Oluştur</a>
+                            <a style="display:@AuthorityManager.GetDisplayVariable(RoleEnum.Employee)" class="nav-link text-dark" asp-area="" asp-controller="Employee" asp-action="EmployeeStudents">Öğrencileriniz</a>
                         </li>
                         <li class="nav-item">
-                            <a style="display:@AuthorityManager.GetDisplayVariable(3)" class="nav-link text-dark" asp-area="" asp-controller="Student" asp-action="Update">Öğrenci Güncelle</a>
+                            <a style="display:@AuthorityManager.GetDisplayVariable(RoleEnum.Employee, RoleEnum.Admin)" class="nav-link text-dark" asp-area="" asp-controller="Student" asp-action="Create">Öğrenci Hesabı Oluştur</a>
                         </li>
                         <li class="nav-item">
-                            <a style="display:@AuthorityManager.GetDisplayVariable(1)" class="nav-link text-dark" asp-area="" asp-controller="Notes" asp-action="Index">Notlarım</a>
-                        </li>
-                        @*<li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="JointLoginPage">Oturum Aç</a>
-                        </li>*@
-                        <li class="nav-item">
-                            <a style="display:@AuthorityManager.GetDisplayVariable(1)" class="nav-link text-dark" asp-area="" asp-controller="Student" asp-action="CourseRegistration">Ders Kaydı</a>
+                            <a style="display:@AuthorityManager.GetDisplayVariable(RoleEnum.Admin)" class="nav-link text-dark" asp-area="" asp-controller="Student" asp-action="Update">Öğrenci Güncelle</a>
                         </li>
                         <li class="nav-item">
-                            <a style="display:@AuthorityManager.GetDisplayVariable(3)" class="nav-link text-dark" asp-area="" asp-controller="Employee" asp-action="Create">Personel Hesabı Oluştur</a>
+                            <a style="display:@AuthorityManager.GetDisplayVariable(RoleEnum.Student)" class="nav-link text-dark" asp-area="" asp-controller="Notes" asp-action="Index">Notlarım</a>
                         </li>
                         <li class="nav-item">
-                            <a style="display:@AuthorityManager.GetDisplayVariable(2)" class="nav-link text-dark" asp-area="" asp-controller="Employee" asp-action="Courses">Dersleriniz</a>
+                            <a style="display:@AuthorityManager.GetDisplayVariable(RoleEnum.Student)" class="nav-link text-dark" asp-area="" asp-controller="Student" asp-action="CourseRegistration">Ders Kaydı</a>
                         </li>
                         <li class="nav-item">
-                            <a style="display:@AuthorityManager.GetDisplayVariable(3)" class="nav-link text-dark" asp-area="" asp-controller="Employee" asp-action="Index">Personeller</a>
+                            <a style="display:@AuthorityManager.GetDisplayVariable(RoleEnum.Admin)" class="nav-link text-dark" asp-area="" asp-controller="Employee" asp-action="Create">Personel Hesabı Oluştur</a>
                         </li>
                         <li class="nav-item">
-                            <a style="display:@AuthorityManager.GetDisplayVariable(2)" class="nav-link text-dark" asp-area="" asp-controller="Employee" asp-action="CourseOpening">Ders Açma Paneli</a>
+                            <a style="display:@AuthorityManager.GetDisplayVariable(RoleEnum.Employee)" class="nav-link text-dark" asp-area="" asp-controller="Employee" asp-action="Courses">Dersleriniz</a>
                         </li>
                         <li class="nav-item">
-                            <a style="display:@AuthorityManager.GetDisplayVariable(3)" class="nav-link text-dark" asp-area="" asp-controller="Course" asp-action="Create">Ders Oluştur</a>
+                            <a style="display:@AuthorityManager.GetDisplayVariable(RoleEnum.Employee)" class="nav-link text-dark" asp-area="" asp-controller="Employee" asp-action="CourseOpening">Ders Açma Paneli</a>
+                        </li>
+                        <li class="nav-item">
+                            <a style="display:@AuthorityManager.GetDisplayVariable(RoleEnum.Admin)" class="nav-link text-dark" asp-area="" asp-controller="Course" asp-action="Create">Ders Oluştur</a>
                         </li>
                     </ul>
                 </div>
