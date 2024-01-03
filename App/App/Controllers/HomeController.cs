@@ -17,7 +17,8 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
-        return RedirectToAction("JointLoginPage", "Account");
+        return View();
+        //return RedirectToAction("JointLoginPage", "Account");
     }
 
     public IActionResult Privacy()

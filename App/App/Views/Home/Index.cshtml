@@ -1,27 +1,47 @@
-﻿@{
+﻿@using System.Security.Claims
+
+@{
     ViewData["Title"] = "Home Page";
+    string _welcomeText = "Hoş Geldiniz";
+    string? _userName = User.FindFirst(ClaimTypes.Name)?.Value;
+    if (_userName != null) _welcomeText += ", " + _userName;
 }
 
 <p> @ViewBag.Message </p>
 
-<div class="text-center">
-    @if (ViewBag.Message != null)
-    {
-        <p style="color:green"> @ViewBag.Message </p>
-    }
-    @if (ViewBag.ErrorMessage != null)
-    {
-        <p style="color:red"> @ViewBag.ErrorMessage </p>
-    }
-    @if (TempData["Message"] != null)
-    {
-        <p style="color:red"> @TempData["Message"] </p>
-    }
-    @if (TempData["ErrorMessage"] != null)
-    {
-        <p style="color:red"> @TempData["ErrorMessage"] </p>
-    }
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
-
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <link rel="stylesheet" href="~/css/notes-index.css" asp-append-version="true" />
+</head>
+<body>
+    <div class="text-center">
+        @if (ViewBag.Message != null)
+        {
+            <p style="color:green"> @ViewBag.Message </p>
+        }
+        @if (ViewBag.ErrorMessage != null)
+        {
+            <p style="color:red"> @ViewBag.ErrorMessage </p>
+        }
+        @if (TempData["Message"] != null)
+        {
+            <p style="color:red"> @TempData["Message"] </p>
+        }
+        @if (TempData["ErrorMessage"] != null)
+        {
+            <p style="color:red"> @TempData["ErrorMessage"] </p>
+        }
+        <br />
+        <h2 style="color: #4caf50 ">@_welcomeText</h2>
+        <br />
+        <br />
+        <div class="container1">
+            <h4>Duyurular:</h4>
+            <br />
+            <p>Duyuru Yok</p>
+            <br />
+        </div>
+    </div>
+</body>

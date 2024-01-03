@@ -184,8 +184,6 @@ namespace App.Controllers
                     noteModelList.Add(noteUpdateModel);
                 }
             }
-
-            ViewBag.Message = JsonConvert.SerializeObject(noteModelList);
             return View(noteModelList);
         }
 
@@ -202,8 +200,6 @@ namespace App.Controllers
                 return View();
             }
 
-            string metin = "";
-
             List<Notes> newNoteList = new List<Notes>();
             foreach (var studentNote in noteList)
             {
@@ -211,8 +207,6 @@ namespace App.Controllers
                 note.ID = studentNote.NoteID;
                 note.Score = studentNote.Score;
                 note.LetterScore = LetterScoreManager.LetterScoreCalculator(studentNote.Score);
-
-                metin += note.Score + " " + note.LetterScore + " - ";
 
                 note.IsActive = true;
                 newNoteList.Add(note);
@@ -235,12 +229,10 @@ namespace App.Controllers
             {
                 ViewBag.ErrorMessage = "Bir hata oluştu." + " " + updateReturnEnum;
                 ViewBag.Message = jsonProduct;
-                TempData["ErrorMessage"] = metin;
                 return View();
             }
 
             ViewBag.Message = "İşlem tamamlandı.";
-            ViewBag.ErrorMessage = metin;
             return View();
         }
 

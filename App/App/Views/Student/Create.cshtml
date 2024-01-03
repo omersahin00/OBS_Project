@@ -26,24 +26,21 @@
         <p style="color:red"> @TempData["ErrorMessage"] </p>
     }
     <div class="container2">
-        <h2>Student Create Form</h2>
+        <h2>Öğrenci Hesabı Oluştur</h2>
         <form asp-action="Create" method="post">
-            <label for="Number">Number:</label>
+            <label for="Number">Numara:</label>
             <input type="text" id="Number" name="Number" required>
 
-            <label for="FirstName">First Name:</label>
+            <label for="FirstName">İsim:</label>
             <input type="text" id="FirstName" name="FirstName" required>
 
-            <label for="LastName">Last Name:</label>
+            <label for="LastName">Soyisim:</label>
             <input type="text" id="LastName" name="LastName" required>
 
-            @*<label for="StudentNotesID">Student Notes ID:</label>
-            <input type="text" id="StudentNotesID" name="StudentNotesID" required>x*@
-
-            <label for="Password">Password:</label>
+            <label for="Password">Şifre:</label>
             <input type="text" id="Password" name="Password" required>
 
-            <button type="submit" asp-action="Create">Create</button>
+            <button type="submit" asp-action="Create">Oluştur</button>
         </form>
     </div>
 </body>

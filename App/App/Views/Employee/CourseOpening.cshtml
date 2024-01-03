@@ -55,9 +55,16 @@
                         }
                     </tbody>
                 </table>
+                <button type="submit" asp-action="CourseOpening" asp-controller="Employee">Gönder</button>
             </div>
         }
-        <button type="submit" asp-action="CourseOpening" asp-controller="Employee">Gönder</button>
+        else
+        {
+            <div class="container1">
+                <h3>Açabileceğiniz ders yok.</h3>
+            </div>
+        }
+
     </form>
 </body>
 </html>

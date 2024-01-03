@@ -179,7 +179,8 @@ namespace App.Controllers
 
                 ClaimsPrincipal principal = new ClaimsPrincipal(userIdentity);
                 await HttpContext.SignInAsync(principal, authProporties);
-                return RedirectToAction("EmployeeLogin", "Account");
+                //return RedirectToAction("EmployeeLogin", "Account");
+                return RedirectToAction("Index", "Home");
             }
             else if (loginReturnType == LoginReturnEnum.WrongNumber)
             {
@@ -279,7 +280,8 @@ namespace App.Controllers
                 };
                 ClaimsPrincipal principal = new ClaimsPrincipal(userIdentity);
                 await HttpContext.SignInAsync(principal, authProporties);
-                return RedirectToAction("StudentLogin", "Account");
+                //return RedirectToAction("StudentLogin", "Account");
+                return RedirectToAction("Index", "Home");
             }
             else if (loginReturnType == LoginReturnEnum.WrongNumber)
             {
