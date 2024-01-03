@@ -9,101 +9,101 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = App
 build_property.RootNamespace = App
-build_property.ProjectDir = /Users/omersahin/Desktop/OBS_Project/App/App/
+build_property.ProjectDir = /Users/omersahin/Desktop/DockerInit/App/App/
 build_property.RazorLangVersion = 7.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = /Users/omersahin/Desktop/OBS_Project/App/App
+build_property.MSBuildProjectDirectory = /Users/omersahin/Desktop/DockerInit/App/App
 build_property._RazorSourceGeneratorDebug = 
 
-[/Users/omersahin/Desktop/OBS_Project/App/App/Views/Account/EmployeeLogin.cshtml]
+[/Users/omersahin/Desktop/DockerInit/App/App/Views/Account/EmployeeLogin.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWNjb3VudC9FbXBsb3llZUxvZ2luLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/omersahin/Desktop/OBS_Project/App/App/Views/Account/JointLoginPage.cshtml]
+[/Users/omersahin/Desktop/DockerInit/App/App/Views/Account/JointLoginPage.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWNjb3VudC9Kb2ludExvZ2luUGFnZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/omersahin/Desktop/OBS_Project/App/App/Views/Account/StudentLogin.cshtml]
+[/Users/omersahin/Desktop/DockerInit/App/App/Views/Account/StudentLogin.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWNjb3VudC9TdHVkZW50TG9naW4uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/omersahin/Desktop/OBS_Project/App/App/Views/Course/Create.cshtml]
+[/Users/omersahin/Desktop/DockerInit/App/App/Views/Course/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ291cnNlL0NyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/omersahin/Desktop/OBS_Project/App/App/Views/Employee/CourseOpening.cshtml]
+[/Users/omersahin/Desktop/DockerInit/App/App/Views/Employee/CourseOpening.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRW1wbG95ZWUvQ291cnNlT3BlbmluZy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/omersahin/Desktop/OBS_Project/App/App/Views/Employee/Courses.cshtml]
+[/Users/omersahin/Desktop/DockerInit/App/App/Views/Employee/Courses.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRW1wbG95ZWUvQ291cnNlcy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/omersahin/Desktop/OBS_Project/App/App/Views/Employee/Create.cshtml]
+[/Users/omersahin/Desktop/DockerInit/App/App/Views/Employee/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRW1wbG95ZWUvQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/omersahin/Desktop/OBS_Project/App/App/Views/Employee/EmployeeStudents.cshtml]
+[/Users/omersahin/Desktop/DockerInit/App/App/Views/Employee/EmployeeStudents.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRW1wbG95ZWUvRW1wbG95ZWVTdHVkZW50cy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/omersahin/Desktop/OBS_Project/App/App/Views/Employee/Index.cshtml]
+[/Users/omersahin/Desktop/DockerInit/App/App/Views/Employee/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRW1wbG95ZWUvSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/omersahin/Desktop/OBS_Project/App/App/Views/Home/Index.cshtml]
+[/Users/omersahin/Desktop/DockerInit/App/App/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9JbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/omersahin/Desktop/OBS_Project/App/App/Views/Home/Privacy.cshtml]
+[/Users/omersahin/Desktop/DockerInit/App/App/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9Qcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/omersahin/Desktop/OBS_Project/App/App/Views/Notes/Index.cshtml]
+[/Users/omersahin/Desktop/DockerInit/App/App/Views/Notes/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvTm90ZXMvSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/omersahin/Desktop/OBS_Project/App/App/Views/Notes/NoteUpdate.cshtml]
+[/Users/omersahin/Desktop/DockerInit/App/App/Views/Notes/NoteUpdate.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvTm90ZXMvTm90ZVVwZGF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/omersahin/Desktop/OBS_Project/App/App/Views/Shared/Error.cshtml]
+[/Users/omersahin/Desktop/DockerInit/App/App/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL0Vycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/omersahin/Desktop/OBS_Project/App/App/Views/Shared/_ValidationScriptsPartial.cshtml]
+[/Users/omersahin/Desktop/DockerInit/App/App/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/omersahin/Desktop/OBS_Project/App/App/Views/Student/CourseRegistration.cshtml]
+[/Users/omersahin/Desktop/DockerInit/App/App/Views/Student/CourseRegistration.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU3R1ZGVudC9Db3Vyc2VSZWdpc3RyYXRpb24uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/omersahin/Desktop/OBS_Project/App/App/Views/Student/CourseStudents.cshtml]
+[/Users/omersahin/Desktop/DockerInit/App/App/Views/Student/CourseStudents.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU3R1ZGVudC9Db3Vyc2VTdHVkZW50cy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/omersahin/Desktop/OBS_Project/App/App/Views/Student/Create.cshtml]
+[/Users/omersahin/Desktop/DockerInit/App/App/Views/Student/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU3R1ZGVudC9DcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/omersahin/Desktop/OBS_Project/App/App/Views/Student/Index.cshtml]
+[/Users/omersahin/Desktop/DockerInit/App/App/Views/Student/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU3R1ZGVudC9JbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/omersahin/Desktop/OBS_Project/App/App/Views/Student/Update.cshtml]
+[/Users/omersahin/Desktop/DockerInit/App/App/Views/Student/Update.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU3R1ZGVudC9VcGRhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/omersahin/Desktop/OBS_Project/App/App/Views/_ViewImports.cshtml]
+[/Users/omersahin/Desktop/DockerInit/App/App/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/omersahin/Desktop/OBS_Project/App/App/Views/_ViewStart.cshtml]
+[/Users/omersahin/Desktop/DockerInit/App/App/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/omersahin/Desktop/OBS_Project/App/App/Views/Shared/_Layout.cshtml]
+[/Users/omersahin/Desktop/DockerInit/App/App/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-f20wllild7

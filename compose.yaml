@@ -1,0 +1,41 @@
+services:
+  sql-server-obs:
+    image: mcr.microsoft.com/azure-sql-edge
+    environment:
+      SA_PASSWORD: "reallyStrongPwd123"
+      ACCEPT_EULA: "Y"
+    ports:
+      - 1433:1433
+    networks:
+      - obs-network
+    container_name: obs-sql-server
+
+  web-api:
+    build:
+      context: .
+      dockerfile: ./Web-API/Dockerfile
+    depends_on:
+      - sql-server-obs
+    ports:
+      - 8082:80
+    networks:
+      - obs-network
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+
+  mvc-app:
+    build:
+      context: .
+      dockerfile: ./App/Dockerfile
+    depends_on:
+      - sql-server-obs
+      - web-api
+    ports:
+      - 8080:80
+    networks:
+      - obs-network
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+
+networks:
+  obs-network:

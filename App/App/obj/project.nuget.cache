@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "nuh6RyyZRJUiUPbNGy70L5g2rXVYAca8TwcnSSioWrjZ4kYDV+8/LNEJ53bVC9wkWu+lFZoAMXjpTFVTsclVkA==",
+  "dgSpecHash": "Kf1Zm63x3I1nHgkz4+cQ35Jyyy1uXJxD6Hc2TD6wB/sfyiPU3aHhd5Di1/yOKMFqrmM2DFES9x4PcHlZPn2S7g==",
   "success": true,
-  "projectFilePath": "/Users/omersahin/Desktop/OBS_Project/App/App/App.csproj",
+  "projectFilePath": "/Users/omersahin/Desktop/DockerInit/App/App/App.csproj",
   "expectedPackageFiles": [
     "/Users/omersahin/.nuget/packages/newtonsoft.json/13.0.3/newtonsoft.json.13.0.3.nupkg.sha512"
   ],

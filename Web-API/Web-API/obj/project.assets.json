@@ -3311,11 +3311,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/omersahin/Desktop/OBS_Project/Web-API/Web-API/Web-API.csproj",
+      "projectUniqueName": "/Users/omersahin/Desktop/DockerInit/Web-API/Web-API/Web-API.csproj",
       "projectName": "Web-API",
-      "projectPath": "/Users/omersahin/Desktop/OBS_Project/Web-API/Web-API/Web-API.csproj",
+      "projectPath": "/Users/omersahin/Desktop/DockerInit/Web-API/Web-API/Web-API.csproj",
       "packagesPath": "/Users/omersahin/.nuget/packages/",
-      "outputPath": "/Users/omersahin/Desktop/OBS_Project/Web-API/Web-API/obj/",
+      "outputPath": "/Users/omersahin/Desktop/DockerInit/Web-API/Web-API/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/omersahin/.nuget/NuGet/NuGet.Config"

@@ -60,11 +60,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/omersahin/Desktop/OBS_Project/App/App/App.csproj",
+      "projectUniqueName": "/Users/omersahin/Desktop/DockerInit/App/App/App.csproj",
       "projectName": "App",
-      "projectPath": "/Users/omersahin/Desktop/OBS_Project/App/App/App.csproj",
+      "projectPath": "/Users/omersahin/Desktop/DockerInit/App/App/App.csproj",
       "packagesPath": "/Users/omersahin/.nuget/packages/",
-      "outputPath": "/Users/omersahin/Desktop/OBS_Project/App/App/obj/",
+      "outputPath": "/Users/omersahin/Desktop/DockerInit/App/App/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/omersahin/.nuget/NuGet/NuGet.Config"

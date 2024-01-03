@@ -5,10 +5,15 @@ namespace App.Builders
 {
 	public class ApiUrlBuilder
 	{
-		private string httpSecurity = "s";
-        private string ApiServerAddress = "localhost";
-        private string ApiPortNumber = "7242";
-		private string _urlType = "";
+		//private string httpSecurity = "s";
+		//private string ApiServerAddress = "localhost";
+		//private string ApiPortNumber = "7242";
+
+		private string httpSecurity = ""; 
+        private string ApiServerAddress = "web-api"; 
+        private string ApiPortNumber = "80";
+
+        private string _urlType = "";
 		private string _entities = "";
 		private string _request = "";
 		private string _method = "";
