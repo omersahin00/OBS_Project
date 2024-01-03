@@ -17,7 +17,7 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">App</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">OBS</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -25,46 +25,40 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a style="display:@AuthorityManager.GetDisplayVariable(2)" class="nav-link text-dark" asp-area="" asp-controller="Student" asp-action="Index">Tüm Öğrenciler</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a style="display:@AuthorityManager.GetDisplayVariable(2)" class="nav-link text-dark" asp-area="" asp-controller="Employee" asp-action="EmployeeStudents">Öğrencileriniz</a>
                         </li>
                         <li class="nav-item">
-                            <a style="display:@AuthorityManager.GetDisplayVariable(2)" class="nav-link text-dark" asp-area="" asp-controller="Student" asp-action="Index">Student-Index</a>
+                            <a style="display:@AuthorityManager.GetDisplayVariable(2)" class="nav-link text-dark" asp-area="" asp-controller="Student" asp-action="Create">Öğrenci Hesabı Oluştur</a>
                         </li>
                         <li class="nav-item">
-                            <a style="display:@AuthorityManager.GetDisplayVariable(2)" class="nav-link text-dark" asp-area="" asp-controller="Employee" asp-action="EmployeeStudents">Employees-Student</a>
+                            <a style="display:@AuthorityManager.GetDisplayVariable(3)" class="nav-link text-dark" asp-area="" asp-controller="Student" asp-action="Update">Öğrenci Güncelle</a>
                         </li>
                         <li class="nav-item">
-                            <a style="display:@AuthorityManager.GetDisplayVariable(2)" class="nav-link text-dark" asp-area="" asp-controller="Student" asp-action="Create">Student-Create</a>
+                            <a style="display:@AuthorityManager.GetDisplayVariable(1)" class="nav-link text-dark" asp-area="" asp-controller="Notes" asp-action="Index">Notlarım</a>
+                        </li>
+                        @*<li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="JointLoginPage">Oturum Aç</a>
+                        </li>*@
+                        <li class="nav-item">
+                            <a style="display:@AuthorityManager.GetDisplayVariable(1)" class="nav-link text-dark" asp-area="" asp-controller="Student" asp-action="CourseRegistration">Ders Kaydı</a>
                         </li>
                         <li class="nav-item">
-                            <a style="display:@AuthorityManager.GetDisplayVariable(2)" class="nav-link text-dark" asp-area="" asp-controller="Student" asp-action="Update">Student-Update</a>
+                            <a style="display:@AuthorityManager.GetDisplayVariable(3)" class="nav-link text-dark" asp-area="" asp-controller="Employee" asp-action="Create">Personel Hesabı Oluştur</a>
                         </li>
                         <li class="nav-item">
-                            <a style="display:@AuthorityManager.GetDisplayVariable(1)" class="nav-link text-dark" asp-area="" asp-controller="Notes" asp-action="Index">Notes-Index</a>
+                            <a style="display:@AuthorityManager.GetDisplayVariable(2)" class="nav-link text-dark" asp-area="" asp-controller="Employee" asp-action="Courses">Dersleriniz</a>
                         </li>
                         <li class="nav-item">
-                            <a style="display:@AuthorityManager.GetDisplayVariable(1)" class="nav-link text-dark" asp-area="" asp-controller="Student" asp-action="CourseRegistration">Student-CourseRegistration</a>
+                            <a style="display:@AuthorityManager.GetDisplayVariable(3)" class="nav-link text-dark" asp-area="" asp-controller="Employee" asp-action="Index">Personeller</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="JointLoginPage">Account-JointLoginPage</a>
+                            <a style="display:@AuthorityManager.GetDisplayVariable(2)" class="nav-link text-dark" asp-area="" asp-controller="Employee" asp-action="CourseOpening">Ders Açma Paneli</a>
                         </li>
                         <li class="nav-item">
-                            <a style="display:@AuthorityManager.GetDisplayVariable(3)" class="nav-link text-dark" asp-area="" asp-controller="Employee" asp-action="Create">|Gizli|Account-Create</a>
-                        </li>
-                        <li class="nav-item">
-                            <a style="display:@AuthorityManager.GetDisplayVariable(2)" class="nav-link text-dark" asp-area="" asp-controller="Employee" asp-action="Courses">Employee-Courses</a>
-                        </li>
-                        <li class="nav-item">
-                            <a style="display:@AuthorityManager.GetDisplayVariable(3)" class="nav-link text-dark" asp-area="" asp-controller="Employee" asp-action="Index">|Gizli|Employees</a>
-                        </li>
-                        <li class="nav-item">
-                            <a style="display:@AuthorityManager.GetDisplayVariable(2)" class="nav-link text-dark" asp-area="" asp-controller="Employee" asp-action="CourseOpening">Employee-CourseOpening</a>
-                        </li>
-                        <li class="nav-item">
-                            <a style="display:@AuthorityManager.GetDisplayVariable(3)" class="nav-link text-dark" asp-area="" asp-controller="Course" asp-action="Create">Course-Create</a>
+                            <a style="display:@AuthorityManager.GetDisplayVariable(3)" class="nav-link text-dark" asp-area="" asp-controller="Course" asp-action="Create">Ders Oluştur</a>
                         </li>
                     </ul>
                 </div>
@@ -74,14 +68,21 @@
                 }
                 else
                 {
-                    <p>Giriş yapmış bir kullanıcı yok.</p>
+                    <p class="nav-item">Giriş yapmış bir kullanıcı yok.</p>
+                    <div style="margin: 10px">
+                        <form asp-controller="Account" asp-action="JointLoginPage" method="get">
+                            <button> Oturum Aç </button>
+                        </form>
+                    </div>
                 }
             </div>
             @if (User.Identity != null && User.Identity.IsAuthenticated)
             {
-                <form asp-controller="Account" asp-action="Logout" method="post">
-                    <button type="submit"> Çıkış Yap </button>
-                </form>
+                <div style="margin: 10px">
+                    <form asp-controller="Account" asp-action="Logout" method="post">
+                        <button type="submit"> Çıkış Yap </button>
+                    </form>
+                </div>
             }
         </nav>
     </header>
