@@ -8,7 +8,7 @@ namespace Web_API.Concrete
 	{
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Data Source=localhost,1433;Initial Catalog=sqlOBS;User ID=SA;Password=reallyStrongPwd123;TrustServerCertificate=true;");
+            optionsBuilder.UseSqlServer("Data Source=obs-sql-server,1433;Initial Catalog=sqlOBS;User ID=SA;Password=reallyStrongPwd123;TrustServerCertificate=true;");
         }
 
         public DbSet<Student> Students { get; set; }
