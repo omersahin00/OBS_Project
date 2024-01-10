@@ -15,7 +15,7 @@ namespace Web_API.Entities
 
         public int Score { get; set; }
 
-        public string? LetterScore { get; set; } // Harici sabit bir tabloya al.
+        public string? LetterScore { get; set; } 
 
         public bool IsActive { get; set; }
     }
